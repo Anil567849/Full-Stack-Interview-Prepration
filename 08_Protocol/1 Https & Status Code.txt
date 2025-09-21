@@ -1,0 +1,37 @@
+
+
+HTTP (Hypertext Transfer Protocol) defines several methods or verbs that indicate the desired action to be performed on a resource. Here are the most commonly used HTTP methods:
+
+GET: Retrieves data from the server. It should only retrieve data and should have no other effect.
+POST: Submits data to the server to create a new resource. It can also be used to send data to the server to update an existing resource.
+PUT: Updates a resource on the server with the provided data. It replaces the entire resource with the new data.
+DELETE: Deletes the specified resource from the server.
+PATCH: Applies partial modifications to a resource. It's used to apply partial modifications to a resource.
+HEAD: Similar to GET but only returns the HTTP headers and no response body. It's often used to check the validity of a resource without actually downloading it.
+OPTIONS: Requests information about the communication options available for the target resource, such as what HTTP methods are supported or which headers can be used.
+TRACE: Echoes the received request back to the client, allowing clients to see what changes or additions have been made by intermediate servers.
+
+
+------------------------------------
+
+
+
+HTTP status codes are three-digit numbers that indicate the result of a client's request to the server. They provide information about the success, failure, or other conditions related to the request. Here's a breakdown of the various categories of HTTP status codes:
+
+1xx Informational: These status codes indicate that the server has received the request and is continuing to process it. They are mainly used for informational purposes and don't typically require any action from the client.
+2xx Success: These status codes indicate that the request was successfully received, understood, and accepted by the server.
+200 OK: The request was successful.
+201 Created: The request has been fulfilled and a new resource has been created.
+204 No Content: The server successfully processed the request but is not returning any content.
+3xx Redirection: These status codes indicate that further action needs to be taken by the client to complete the request.
+301 Moved Permanently: The requested resource has been permanently moved to a new URL.
+302 Found: The requested resource has been temporarily moved to a different URL.
+304 Not Modified: The client's cached copy of the resource is still valid.
+4xx Client Error: These status codes indicate that there was an error on the client side, such as invalid request syntax or authentication issues.
+400 Bad Request: The server cannot process the request due to invalid syntax.
+401 Unauthorized: The request requires user authentication.
+404 Not Found: The requested resource could not be found on the server.
+5xx Server Error: These status codes indicate that there was an error on the server side while processing the request.
+500 Internal Server Error: A generic error message indicating that something has gone wrong on the server.
+502 Bad Gateway: The server received an invalid response from an upstream server.
+503 Service Unavailable: The server is currently unable to handle the request due to temporary overloading or maintenance of the server.

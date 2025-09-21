@@ -1,0 +1,18 @@
+
+
+1. model: 'gpt-3.5-turbo' //[required] which model you want to use
+2. prompt: 'hello' // [optional] string or array
+3. suffix: 'Anil' // [options, default: null] The suffix that comes after a completion of inserted text.
+4. max_tokens: 100, // [int, optional, default: 16] number of completion token only not prompt token
+5. temperature: 0, // [number, optional, default: 1] range={0 to 2} higher value generate output more random and unique if you ask same question each time
+6. top_p: 1, // [number, optional, default: 1] you can control the balance between more diverse and creative responses [0 to 2 = 0 represents diverse and creative]
+7. n: 1, // [int, optional, default: 1] How many completions to generate for each prompt.
+8. stream: false // [bool, optional, default: false] Whether to stream back partial progress. If set, tokens will be sent as data-only server-sent events as they become available, with the stream terminated by a data: [DONE] message.
+9. echo: false, // [bool, optional, default: false] Echo back the prompt in addition to the completion
+10. stop: null, // [string or array, optional, default: null] // ['The end', 'To be continued', 'Finale', 'That\'s all folks'] The returned text will not contain the stop sequence.
+11. presence_penalty: null, //[int, optional, default: 0] // [Number between -2.0 and 2.0.] It can be helpful to mitigate issues like repetitive or excessive usage.  positive presence penalty encourages the model to generate responses that include additional positive aspects of the prompt beyond just the given-prompt. // Ager Keyboard par baat chli ho to ye keyword or uuse pre jakar design, typing par bhi baat kr payega. [Par unrelated Cpu or RAM etc par nhi jata] ||||| [lower presence panelty only talk about specific prompt eg. keyboard = then it will only talk about keyboard not its design or typing experience]
+12. frequency_penalty: 0, [number, optional, default: 0] // the positive frequency penalty encourages the model to generate output that may include more repetition of certain phrases or words. 
+13. logprobs: null, // [int, optional, default: null] Include the log probabilities on the logprobs most likely tokens, as well the chosen tokens. For example, if logprobs is 5, the API will return a list of the 5 most likely tokens. The API will always return the logprob of the sampled token, so there may be up to logprobs+1 elements in the response. |||| check when you get response from api : the logprobs object contains two arrays: tokens and logprobs. The tokens array lists the corresponding tokens, and the logprobs array provides the log probabilities for each token. The number of elements in both arrays corresponds to the value of the logprobs parameter. By setting a specific value for logprobs, you can obtain the log probabilities for the most likely tokens in the generated text, which can be useful for further analysis or processing of the model's output. 
+14. best_of: 1, // [int, optional, default: 1] Generates best_of completions server-side and returns the "best" (the one with the highest log probability per token). Results cannot be streamed. When used with n, best_of controls the number of candidate completions and n specifies how many to return – best_of must be greater than n.
+15. logit_bias: null, // [map, optional, default: null] Modify the likelihood of specified tokens appearing in the completion.
+16. user: 'human', // [string, optional] A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse

@@ -1,0 +1,59 @@
+🔹 Single Session Login (SSL)
+👉 Only one active session per user account.
+When you log in on a new device, the old session gets invalidated.
+
+🔧 How it works
+1. With sessions/cookies (stateful):
+Server keeps a sessionId in DB/Redis.
+On login, the server removes any existing session for that user and creates a new one.
+Old devices will get logged out because their sessionId is no longer valid.
+
+2. With JWT (stateless):
+Server issues a new JWT at login.
+To enforce “single session”, the server must store the latest valid token (or its ID) in DB/Redis.
+When a request comes in with an old token, the server rejects it because it doesn’t match the stored “active token”.
+
+🏦 Example
+Banking apps → single session for security. If you log in on your laptop, your phone will be logged out.
+
+*********
+
+🔹 Multi-Session Login (MSL)
+👉 Multiple active sessions allowed at once.
+Each device/browser can have its own valid session simultaneously.
+
+🔧 How it works
+1. With sessions/cookies (stateful):
+Server stores multiple sessionIds per user in DB/Redis.
+Each device gets a unique session entry.
+Logging in on one device does not delete others.
+
+2. With JWT (stateless):
+Each device gets its own JWT.
+Server doesn’t care how many tokens are out there.
+If you want to manage/logout devices individually → you store tokens in DB keyed by user + device.
+
+🎬 Example
+Netflix → lets you stay logged in on TV, phone, and laptop.
+
+*********
+
+SSO (Single Sign-On)
+👉 SSO lets a user log in once and use that login across multiple apps/websites without entering credentials again.
+
+Example:
+You log into your Google account once.
+Then you can use Gmail, YouTube, Google Drive, Docs, Calendar… all without logging in separately.
+
+🛠 How it Works (High-Level)
+User tries to access an app (Service Provider) → e.g., Google Drive.
+The app checks → “Is the user already logged in with the Identity Provider?” (like Google Accounts).
+If not, it redirects you to the Identity Provider (IdP) login page.
+You enter credentials once (on IdP).
+IdP authenticates you, then sends back a token (like JWT or SAML assertion) to the app.
+Now, that token works for all apps connected to the same IdP → no need to log in again.
+
+📌 Core Components
+Identity Provider (IdP): The service that authenticates you. Examples: Google, Microsoft Azure AD, Okta.
+Service Providers (SPs): Apps/websites that trust the IdP (Drive, Docs, Slack, etc.).
+Protocols: Behind the scenes, SSO uses standards like OAuth2, OpenID Connect, or SAML.

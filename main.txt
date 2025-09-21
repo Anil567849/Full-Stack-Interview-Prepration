@@ -1,0 +1,51 @@
+HTML: 
+https://www.simplilearn.com/html-interview-questions-and-answers-article
+
+CSS: 
+https://www.geeksforgeeks.org/css-interview-questions-and-answers/
+
+JS: 
+https://www.edureka.co/blog/interview-questions/javascript-interview-questions/
+https://www.w3schools.com/js/js_htmldom.asp
+method chaining: https://www.geeksforgeeks.org/javascript/method-chaining-in-javascript/
+
+REACT: 
+https://www.geeksforgeeks.org/react-interview-questions/
+https://www.w3schools.com/react/react_hooks.asp
+
+NODE: 
+https://www.geeksforgeeks.org/node-interview-questions-and-answers/
+cashfree payment integration: https://github.com/Anil567849/cashfree-payment-react-node
+
+EXPRESS: 
+https://www.geeksforgeeks.org/top-50-express-js-interview-questions-and-answers/
+https://github.com/Anil567849/express-concepts
+
+REDUX/REDUX TOOLKIT: 
+https://www.geeksforgeeks.org/react-redux-interview-questions-and-answers/
+
+MONGO: 	
+https://www.simplilearn.com/mongodb-interview-questions-and-answers-article
+https://www.w3schools.com/mongodb/index.php
+https://www.interviewbit.com/mongodb-interview-questions/
+
+PHP: 
+https://www.interviewbit.com/php-interview-questions/
+
+SQL: 
+https://www.geeksforgeeks.org/sql-interview-questions/
+
+POSTGRES:
+https://www.w3schools.com/postgresql/postgresql_create_table.php
+
+NEXTJS:
+https://nextjs.org/docs
+Rate Limit: https://github.com/Anil567849/next-js-rate-limit/blob/master/src/app/api/rate-limit/route.ts
+Ecom Project: https://github.com/Anil567849/quick-com-nextjs
+
+
+DOCKER:
+
+DSA:
+Striver Sheet: https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2
+Sorting Algo: https://github.com/Anil567849/DSA-sorting-algo

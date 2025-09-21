@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <div class="container">
+        <h2>Custom Counter</h2>
+        <my-counter></my-counter>
+        <my-button></my-button>
+
+        <h2>User List</h2>
+        <div id="users"></div>
+
+        <template id="user-template">
+            <div class="user">Default User</div>
+        </template>
+    </div>
+
+    <script>
+
+        const shadowDOM = () => {
+            class MyCounter extends HTMLElement {
+                constructor() {
+                    super();
+                    this.count = 0;
+
+                        // Attach Shadow DOM (for encapsulation of styles and markup)
+                    this.attachShadow({ mode: "open" });
+                    this.shadowRoot.innerHTML = `
+            <style>
+            button { margin: 5px; }
+            </style>
+            <div>
+            <p>Count: <span id="value">0</span></p>
+            <button id="inc">+</button>
+            <button id="dec">-</button>
+            </div>
+        `;
+                }
+
+                connectedCallback() {
+                    this.shadowRoot.querySelector("#inc")
+                        .addEventListener("click", () => this.update(1));
+                    this.shadowRoot.querySelector("#dec")
+                        .addEventListener("click", () => this.update(-1));
+                }
+
+                update(step) {
+                    this.count += step;
+                    this.shadowRoot.querySelector("#value").textContent = this.count;
+                }
+            }
+
+            customElements.define("my-counter", MyCounter);
+        }
+
+        const funcCustomElements = () => {
+            class MyButton extends HTMLElement {
+                connectedCallback() {
+                    this.innerHTML = `<button>Click Me</button>`;
+                }
+            }
+            customElements.define('my-button', MyButton);
+        }
+
+        const funcHTMLTemplate = () => {
+            const container = document.getElementById("users");
+            const template = document.getElementById("user-template");
+
+            // Clone the template
+            const user1 = template.content.cloneNode(true);
+            user1.querySelector(".user").textContent = "Anil Bhai";
+
+            const user2 = template.content.cloneNode(true);
+            user2.querySelector(".user").textContent = "Rohit";
+
+            // Append to container
+            container.appendChild(user1);
+            container.appendChild(user2);
+        }
+
+        shadowDOM();
+        funcCustomElements();
+        funcHTMLTemplate();
+    </script>
+    
+</body>
+
+</html>

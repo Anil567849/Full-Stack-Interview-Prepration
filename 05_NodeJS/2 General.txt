@@ -1,0 +1,14 @@
+🔹 What is I/O (Input/Output)?
+It refers to any interaction between a program and the outside world.
+That "outside world" can be:
+1. User → typing on keyboard (input), seeing text on screen (output).
+2. File system → reading a file (input), writing a file (output).
+3. Network → receiving a request from the internet (input), sending a response (output).
+4. Devices → sending data to a printer, reading from a camera, etc.
+
+🔹 Why I/O is Special?
+CPU operations (like 2 + 2 or sorting an array) are very fast (nanoseconds).
+I/O operations are slow compared to CPU (milliseconds to seconds):
+Reading from disk: micro to milliseconds.
+Sending a network request: milliseconds to seconds.
+Waiting for a user: could be forever 😅.

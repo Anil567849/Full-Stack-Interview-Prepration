@@ -1,0 +1,414 @@
+EVENT LOOP:
+https://www.youtube.com/watch?v=8zKuNo4ay8E
+
+**********
+
+🔹 Compiled vs. Interpreted Languages
+1. Compiled Languages
+In a compiled language (like C, C++, Go, Rust):
+Source code (.c or .cpp) is translated ahead of time into machine code (binary instructions specific to CPU).
+The compiler (like gcc, g++) does this translation once → creates an executable file.
+When you run it, CPU directly executes that machine code.
+✅ Fast execution (because no translation at runtime).
+❌ Slower development cycle (because you must compile every time).
+
+2. Interpreted Languages
+In an interpreted language (like JavaScript, Python, Ruby):
+The source code is not pre-compiled into machine code.
+Instead, an interpreter (like Python interpreter or JavaScript engine) reads the code line by line and executes it on the fly.
+✅ Flexible (easy to test & run quickly).
+❌ Slower execution compared to compiled languages.
+
+
+**********
+
+🔹 Propagation mechanism
+Event Bubbling = Target → Parent → Document.
+Event Capturing = Document → Parent → Target.
+Default = Bubbling phase.
+
+***********
+
+1.
+Typeof checks the datatype and return a string;
+
+let a = 10; // it is number;
+console.log(typeof a) // number
+let tp = typeof a // return a string;
+console.log(tp); // 'string'
+
+2.
+if else is a statement;
+In programming, a statement is a complete instruction that performs some action.
+if (condition) {
+  // code block to execute if condition is true
+} else {
+  // code block to execute if condition is false
+}
+
+ternary operator  is a expression.
+    condition ? expression1 : expression2
+
+ternary operator; We can store answer in a variable. 
+    const ans = condition ? expression1 : expression2
+
+
+
+
+3.
+In JavaScript, type coercion refers to the process of converting values from one data type to another.
+Implicit Type Coercion:
+    Implicit type coercion occurs when JavaScript automatically converts values from one data type to another without the programmer explicitly specifying it.
+    console.log(5 + '5'); // Output: "55"
+
+    Trick:
+    If at least one operand is a string → concatenation.
+    Otherwise → numeric addition.
+
+    5 - '5'  // 0   (because `-` operator always coerces to number)
+    '5' * 2  // 10  (string coerced to number)
+    '5' + 2  // "52" (because + prefers string if one is string)
+
+Explicit Type Coercion:
+    Explicit type coercion occurs when the programmer intentionally converts values from one data type to another using built-in functions or operators.
+    console.log(Number('10')); // Output: 10
+
+
+4.
+Global Scope:
+    Variables declared outside of any function, block, or module have global scope.
+    var globalVar = 'I am a global variable';
+
+Local Scope:
+    Variables declared within a function, block, or module have local scope.
+    function myFunction() {
+        var localVar = 'I am a local variable';
+        console.log(localVar); // localVar is accessible here
+    }
+    console.log(localVar); // Error: localVar is not defined
+
+block scope:
+JavaScript also has block scope, introduced with the let and const keywords in ECMAScript 6 (ES6).
+if (true) {
+  let blockVar = 'I am a block-scoped variable';
+  console.log(blockVar); // blockVar is accessible here
+}
+
+console.log(blockVar); // Error: blockVar is not defined
+
+
+
+5. 
+Difference bw using defer tag in script tag and using script tag before the </body>;
+Main difference is: (in defer: if js is external it will start downloading the js but execute when webpage is loaded.)
+
+
+6.
+<script src=""></script>
+When the browser encounters this <script> tag, it stops parsing the HTML document, fetches the external JavaScript file, executes it, and then resumes parsing the HTML document.
+This can potentially block the rendering of the HTML content until the JavaScript file is downloaded and executed, especially if the JavaScript file is large or the server response is slow.
+
+<script defer src=""></script>
+The defer attribute tells the browser to defer the execution of the JavaScript code until after the HTML content has been parsed.
+The browser will continue parsing the HTML document while the external JavaScript file is being downloaded in the background.
+The deferred JavaScript code will be executed after the HTML document is ready, just before the DOMContentLoaded event is fired.
+
+<script async src=""></script>
+The async attribute tells the browser to download the external JavaScript file asynchronously while continuing to parse the HTML document.
+The JavaScript file will be executed as soon as it is downloaded, regardless of whether the HTML parsing is complete.
+
+
+7. 
+class User { }
+let arr = [1, 2, 3]
+let obj = {a: 'anil', b: "sunil"}
+let f = function name(){}
+
+console.log(typeof User); // function
+console.log(typeof arr); // object
+console.log(typeof obj); // object
+console.log(typeof f); // function
+// in js function in behind is object;
+
+
+8.
+The rest parameter syntax allows a function to accept an indefinite number of arguments as an array
+Rest parameter must be last formal parameter
+function sum(...theArgs) {
+  let total = 0;
+  for (const arg of theArgs) {
+    total += arg;
+  }
+  return total;
+}
+
+console.log(sum(1, 2, 3));
+// Expected output: 6
+
+
+9.
+The JavaScript spread operator (...) expands an iterable (like an array) into more elements.
+const numbersOne = [1, 2, 3];
+const numbersTwo = [4, 5, 6];
+const numbersCombined = [...numbersOne, ...numbersTwo];
+
+
+10.
+In js name variable already be there and contains empty string - {Only in js, not in nodejs}
+Code: Only for Var | Const and let will throw error
+Console.log(name): it will give you empty string rather name undefined;
+
+In hoisting - Only for Var
+console.log(name): it will show anil - because it presented already there with empty string
+var name = "Anil"; // now even if you remove this variable after excuting a time - name will contain Anil now | but for new tab/window/screen it will be empty string
+
+
+11. 
+Event Loop, Micro Task and Macro Task;
+EVENT LOOP:
+Event Loop: An Event Loop in JavaScript is said to be a constantly running process that keeps a tab on the call stack. Its main function is to check whether the call stack is empty or not. If the call stack turns out to be empty, the event loop proceeds to execute all the callbacks waiting in the task queue. Inside the task queue, the tasks are broadly classified into two categories, namely micro-tasks and macro-tasks.
+
+MICRO TASK:
+Micro-tasks are often scheduled for things that are required to be completed immediately after the execution of the current script. On completion of one macro-task, the event loop moves on to the micro-task queue.
+Examples: process.nextTick, Promises, queueMicrotask, MutationObserver
+
+MACRO TASK:
+Macro-Task: Macro-task represents some discrete and independent work.
+Examples: setTimeout, setInterval, setImmediate, requestAnimationFrame, I/O, UI Rendering
+
+12.
+If we want to use await keyword without within async function then use top level module
+<script src="./js.js" type="module"></script>
+let x = await foo(); // now we can use await without having outer async function
+
+if we use type="module" it enable "use strict" mode automatically;
+
+without module 
+  a = 10; you can create variable without [let, var, const] it will be global scope. but you can't use this like with type="module" it will not hoisted. In the memory creation phase we can't assign memory to it, it takes memory when we execute that particular line.
+
+
+13.
+Shallow and Deep Copy
+let employee = {
+    eid: "E102",
+    ename: "Jack",
+    eaddress: "New York",
+    salary: 50000
+    address: {
+		ad1: 'new',
+		ad2: 'new new',
+		}
+}
+// Shallow copy (Pass by reference) - if you change value in newEmployee - it's value also be changed in employee
+let newEmployee = employee;    
+
+// Deep Copy - if you change value in newEmployee - it's value can't be changed in employee.
+// Note: If there is function inside a object JSON.parse will not clone function.
+let newEmployee = JSON.parse(JSON.stringify(employee)); 
+
+// Deep Copy - ye address ke under wale ki deep copy nahi bna pata
+// It's works for inner function as well
+let newEmployee = {...emplyoee}; 
+
+// Deep Copy - ye nested destructing se deep copy hogi sabki
+// It's works for inner function as well
+let newEmployee = {...employee, {address: {...employee.address}};
+
+// Deep Copy - it's global function which we can use.
+let newEmployee = structuredClone(employee); 
+
+
+// For Array
+let arr = [1, 2, 3, 4, 5];
+let newArr = JSON.parse(JSON.stringify(arr));
+
+
+// In primitive data type - it just copy value not reference:
+var x = 2;
+var y = x;
+y = 5;
+console.log(x, y) // 2, 5
+
+
+
+14.
+Freeze Object Data
+const user = {
+    _id: 25,
+    name: "Anil",
+}
+
+Object.defineProperties(user, {_id: {writable: false}})
+
+user._id = 2; // This will not work because _id frozen
+console.log(user._id); // Output: 25
+
+
+15. 
+const a1 = document.getElementsByClassName('h1'); // return HTMLcolletion
+const a2 = document.querySelectorAll('.h1') // return  Nodelist
+Origin:
+  HTMLCollection: Represents a collection of elements with a specific tag name, such as <div> or <p>.
+  NodeList: Represents a collection of nodes, which can include elements, text nodes, comment nodes, etc.
+          It is often returned by methods like querySelectorAll() and childNodes.
+
+Indexing:
+  HTMLCollection: Can be accessed by index (collection.item(0) or collection[0]).
+  NodeList: Also supports indexing (list.item(0) or list[0]), but in addition, it can be iterated using array methods like forEach.
+
+Methods:
+  HTMLCollection: Has limited methods compared to NodeList. It supports indexed access (item() method or square brackets notation) and the length property but doesn't have forEach, map, or other array methods.
+  NodeList: Supports more array methods like forEach, map, filter, etc., making it more versatile for manipulation.
+
+
+16.
+console.log(0123); output: 83 - because it will considered it as octal number as try to convert base 8 to 10
+Octal literals are not allowed because disallowing them discourages programmers from using leading zeros as padding in a script. 000009;
+
+
+17.
+SSG vs SSR
+
+What is Static Site Generation (SSG)?
+Static Site generation renders a page at build time. This means that for SSG, the process of creating the web page occurs before the site is launched and is accessed by users. Look at it this way: the HTML and content for each web page are pre-rendered or pre-generated, so they are ready and static (unchanging) when the website is deployed to a web server.
+
+What is Server-Side Rendering (SSR)?
+Unlike static site generation, server-side rendering focuses on or renders a page in real-time. In this scenario, when you visit a website, the computer that hosts the website creates the page for you, like a chef preparing a dish as you order it at a restaurant.
+
+
+
+
+18.
+Library vs Framework
+Library: A collection of functions and utilities that you can use to perform specific tasks. You call functions of a library when you need them.
+Framework: A pre-built structure or architecture that dictates the flow and organization of your code. You write your code within the framework, following its conventions and guidelines. The framework calls your code when certain events occur.
+In simpler terms, with a library, you are in control and call the functions when needed, while with a framework, the control is inverted, and the framework calls your code according to its predefined structure.
+
+
+
+
+
+19.
+let arr1 = [1, 2];
+let arr2 = [1, 2];
+console.log(arr1 == arr1); // true
+console.log(arr1 === arr1); // true
+
+This condition will always return 'false' since JavaScript compares objects by reference, not value.
+console.log(arr1 == arr2); // false
+console.log(arr1 === arr2); // false
+console.log([1, 2] === [1, 2]); // false
+
+
+20.
+Truthy values: These values evaluate to true when used in a Boolean context. This includes:
+Non-zero numbers (any number except 0)
+Non-empty strings (including strings with spaces)
+Arrays, objects, and functions (even if they are empty)
+Boolean value true itself
+
+
+Falsy values: These values evaluate to false when used in a Boolean context. This includes:
+The number 0
+The empty string ("")
+The boolean value false itself
+null
+undefined
+
+
+21.
+In JavaScript, polyfills are pieces of code (usually functions or libraries) used to provide modern functionality on older browsers that do not natively support it.
+
+Array Methods: Methods like Array.prototype.includes or Array.prototype.flat may not be available in older browsers.
+Promise: The Promise API is not available in older browsers like Internet Explorer.
+Fetch API: The fetch function, which provides a modern way to make HTTP requests, is not supported in older browsers.
+ECMAScript 6 Features: Features like String.prototype.startsWith, Number.isNaN, and Object.assign may require polyfills.
+
+
+We suppose Array.prototype.includes is not available on browser so we write our own.
+if (!Array.prototype.includes) {
+  Array.prototype.includes = function(element, start) {
+    'use strict';
+    if (this == null) {
+      throw new TypeError('Array.prototype.includes called on null or undefined');
+    }
+
+    var O = Object(this);
+    var len = parseInt(O.length, 10) || 0;
+    if (len === 0) {
+      return false;
+    }
+
+    var n = start | 0;
+    var k = Math.max(n >= 0 ? n : len - Math.abs(n), 0);
+
+    while (k < len) {
+      if (O[k] === element || (element !== element && O[k] !== O[k])) {
+        return true;
+      }
+      k++;
+    }
+
+    return false;
+  };
+}
+
+
+
+
+
+
+
+22.
+TCP (Transmission Control Protocol):
+  Reliable Communication: TCP is like a certified mail service. When you send data using TCP, it makes sure that the data reaches its destination accurately and in the right order. If some data gets lost along the way, TCP will resend it.
+
+  Connection-Oriented: Before sending data, TCP establishes a connection between the sender and the receiver. This is like making a phone call where both parties need to pick up the phone and say "hello" before talking.
+
+  Error Checking: TCP checks for errors in the data and ensures that it is delivered correctly. If there are any issues, it corrects them.
+
+  Flow Control: TCP controls the flow of data so that the sender doesn't overwhelm the receiver with too much information at once, making sure that both sides communicate smoothly.
+
+  Eg: upload videos, files.
+
+UDP (User Datagram Protocol):
+  Faster, Less Reliable: UDP is like sending a postcard. You just send it off without worrying too much about whether it arrives. It's faster because it doesn't check if the data reached its destination or if it arrived in the correct order.
+
+  Connectionless: UDP doesn't establish a connection before sending data. It just sends the data directly. This is like yelling across a room without checking if the other person is ready to listen.
+
+  No Error Checking: UDP does not check for errors in the data. It sends the data as-is and doesn't resend anything if it gets lost.
+
+  Used for Speed: UDP is often used for applications where speed is more important than reliability, such as live video streaming, online gaming, or voice calls. In these cases, a few lost packets (small pieces of data (eg voice etc)) won't ruin the overall experience.
+
+
+
+*********
+
+🔹 What is a Factory Function?
+A factory function is just a function that returns an object.
+Instead of using class or new, you call the function to create ("manufacture") new objects.
+It’s a pattern to encapsulate object creation.
+
+```
+function createUser(name, age) {
+  return {
+    name,
+    age,
+    greet() {
+      console.log(`Hi, my name is ${this.name} and I’m ${this.age} years old.`);
+    }
+  };
+}
+
+const user1 = createUser("Anil", 25);
+const user2 = createUser("Rahul", 30);
+
+user1.greet(); // Hi, my name is Anil and I’m 25 years old.
+user2.greet(); // Hi, my name is Rahul and I’m 30 years old.
+```
+
+✅ Benefits of Factory Functions
+No need for new keyword (simpler than classes).
+Encapsulation — can hide private variables with closures.
+Flexibility — easy to compose and extend.
+Avoids issues with this binding in classes.

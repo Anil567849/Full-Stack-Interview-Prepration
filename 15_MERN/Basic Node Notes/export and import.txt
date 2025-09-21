@@ -1,0 +1,52 @@
+
+1. OLD WAY OF DEFAULT EXPORT
+module.exports = router;
+
+1.IMPORT 
+const kuchBhiName = require(pathName);
+
+
+2. OLD WAY OF NAMED EXPORT
+module.exports.router = 5;
+module.export.something = 9;
+module.exports = {router, somthing}
+
+
+2. IMPORT - destructure krna hoga - *same name dena hota h
+const {router, something} = require(pathName);
+
+
+
+
+
+
+// new way
+put this code in package.json first
+type : 'module',
+
+
+3. NEW WAY OF DEFAULT EXPORT
+export default router; - new way of default export
+
+3.IMPORT - file extension jrur de
+import kuchBhiName from 'pathName.js';
+
+
+4.NEW WAY OF NAMED EXPORT
+export const router = 5;
+export const something = 9;
+export  default = {
+        router,
+       something
+ }
+
+4. IMPORT - destructure krna hoga - *same name dena hota h
+import {router, something} from 'pathName.js';
+
+
+
+
+
+
+
+

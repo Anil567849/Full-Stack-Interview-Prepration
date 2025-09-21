@@ -1,0 +1,50 @@
+
+
+
+h1{
+    text-align: center;
+    margin: 20px;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.containerContent{
+    height: 70vh;
+
+    width: 60vw;
+
+
+}
+
+
+
+
+
+.containerContent form{
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+
+}
+
+.containerContent form .myInput{
+    padding: 8px;
+    margin: 8px;
+    font-size: 16px;
+    
+    
+}
+
+
+#submitBtn{
+    font-size: 20px;
+    padding: 8px;
+    background-color: burlywood;
+    font-weight: bold;
+}

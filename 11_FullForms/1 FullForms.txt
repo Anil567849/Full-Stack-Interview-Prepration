@@ -1,0 +1,124 @@
+ACID → 
+Atomicity, Consistency, Isolation, Durability
+
+These are properties of transactions in databases (like PostgreSQL, MySQL, MongoDB with transactions).
+
+1. Atomicity → All steps in a transaction succeed or all fail.
+Example: Money transfer → debit from Account A and credit to Account B. If debit succeeds but credit fails, the entire transaction is rolled back.
+
+2. Consistency → Database constraints (rules) must be maintained.
+Example: If a bank balance must never go negative, transactions must always respect that.
+
+3. Isolation → Transactions running at the same time don’t mess up each other.
+Example: Two people booking the same last movie seat → isolation ensures only one succeeds.
+
+4. Durability → Once committed, data is stored permanently, even after crash or restart.
+
+
+
+SOLID → 
+Five Object-Oriented Design Principles
+
+These make software easier to scale, test, and maintain.
+
+S (Single Responsibility Principle)
+A class should only have one job.
+❌ Bad: A User class handles login, payments, and notifications.
+✅ Good: Separate LoginService, PaymentService, NotificationService.
+
+O (Open/Closed Principle)
+Classes should be open for extension, closed for modification.
+New features can be added without modifying existing code.
+Example: Instead of modifying a Payment class for every new payment method, extend it with CreditCardPayment, PayPalPayment, etc.
+
+L (Liskov Substitution Principle)
+Subclasses should replace parent classes without breaking behavior.
+Example: If Bird has fly(), but Penguin extends Bird and can’t fly → violates this principle.
+
+I (Interface Segregation Principle)
+Don’t force classes to implement methods they don’t use.
+Example: Printer interface shouldn’t force scan() if not all printers scan. Better: Printable, Scannable.
+
+D (Dependency Inversion Principle)
+Depend on abstractions, not concrete classes.
+Loose coupling: Reduces dependencies between modules, making the code more flexible and easier to test.
+Example: A ReportService should depend on DatabaseInterface, not directly on MySQLDatabase. Makes it easy to switch to PostgresDatabase.
+
+
+SDLC → 
+Software Development Life Cycle
+
+This is a process for building software. Think of it like a recipe from idea → working product.
+
+Phases:
+Requirement Analysis → What do users need?
+Planning → Cost, timeline, feasibility.
+Design → System design, architecture, database schema
+Development → Writing actual code.
+Testing → Checking bugs, security, performance.
+Deployment → Release to users (servers, app stores).
+Maintenance → Fix bugs, add features.
+
+API → 
+Application Programming Interface
+
+An API is a contract between two systems → defines how they talk.
+
+Example:
+Google Maps API → gives routes.
+Payment API (Stripe, Razorpay) → lets apps accept money.
+
+Types of APIs:
+REST APIs (most common, lightweight, uses HTTP/JSON).
+SOAP APIs (older, enterprise, uses XML).
+GraphQL APIs (flexible querying).
+
+REST → 
+Representational State Transfer
+
+A style of building APIs over HTTP.
+
+Principles:
+Client-Server → Client (browser/app) requests, server responds.
+Stateless → Each request contains everything (no memory of past requests).
+Cacheable → Responses can be cached for speed.
+
+Uniform Interface → Uses HTTP verbs:
+GET /users → get users
+POST /users → add user
+PUT /users/1 → update user
+DELETE /users/1 → remove user
+
+Representation → Data returned as JSON/XML.
+
+SOAP → 
+Simple Object Access Protocol
+
+SOAP is a protocol, not just a style like REST.
+
+Uses XML messages.
+
+Requires WSDL (Web Services Description Language) to describe the API.
+
+Heavyweight, but supports:
+Strict security
+ACID transactions across services
+Reliability in financial/government systems.
+
+
+SOFTWARE DEVELOPMENT / ARCHITECTURE
+KISS → Keep It Simple, Stupid → don’t overcomplicate.
+DRY → Don’t Repeat Yourself → avoid duplicating code/logic.
+YAGNI → You Aren’t Gonna Need It → don’t add features until required.
+MVC → Model-View-Controller → design pattern for UI apps.
+MVVM → Model-View-ViewModel → used in mobile/web frameworks.
+DDD → Domain-Driven Design → modeling software around business needs.
+
+
+
+
+
+
+
+
+

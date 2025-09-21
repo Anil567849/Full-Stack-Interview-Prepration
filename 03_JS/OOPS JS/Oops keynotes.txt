@@ -1,0 +1,163 @@
+OOPS Key Notes;
+
+1. Class: we use class to create custom datatypes. In js class is a function (typeof). which is object
+
+2. Object: object is an instance of a class.
+
+3. In JavaScript, a constructor is a special type of function that is used to create and initialize objects. When a function is used as a constructor, it is called with the new keyword, which allows it to create a new instance of an object and set up the initial state of that object.
+
+4. prototypes: Every JavaScript function has a prototype property, which is an object.
+When you create a new object using a constructor function, the new object's internal [[Prototype]] (often accessed via __proto__) is set to the constructor's prototype object.
+Methods defined on the constructor's prototype are shared across all instances of that constructor. 
+
+------------------------------------------------------------------------------------
+    // Constructor function
+    function Person(name, age) {
+    this.name = name; // 'this' refers to the new object being created
+    this.age = age;
+    }
+
+    // Adding a method to the prototype
+    Person.prototype.greet = function() {
+    console.log(`Hello, my name is ${this.name}`);
+    };
+
+    // Creating instances using the constructor function
+    const person1 = new Person('Alice', 30);
+    const person2 = new Person('Bob', 25);
+
+    person1.greet(); // Output: Hello, my name is Alice
+    person2.greet(); // Output: Hello, my name is Bob
+------------------------------------------------------------------------------------
+
+5. Properties
+
+Properties are typically defined directly within the constructor function using the this keyword or added to an object after its creation.
+
+function Person(name, age) {
+  this.name = name; // Property 'name'
+  this.age = age;   // Property 'age'
+}
+
+const person1 = new Person('Alice', 30);
+console.log(person1.name); // Output: Alice
+console.log(person1.age);  // Output: 30
+
+
+6. Methods 
+Methods are functions associated with an object. They define behaviors that the object can perform and are typically used to manipulate the object's properties or to perform specific actions.
+
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
+  
+    // Method defined within the constructor
+    this.describe = function() {
+      return `${this.name} is ${this.age} years old.`;
+    };
+  }
+
+
+7. Super Keyword 
+if you don't use super() it will directly take all properties, but if you use then pass all the arguments.
+
+  class Animal {
+    constructor(name) {
+      this.name = name;
+    }
+  
+    speak() {
+      console.log(`${this.name} makes a noise.`);
+    }
+  }
+  
+  class Dog extends Animal {
+    constructor(name, breed) {
+      super(name); // Call the parent class's constructor
+      this.breed = breed;
+    }
+  
+    speak() {
+      console.log(`${this.name} barks.`);
+    }
+  } 
+
+
+********
+🔹 Constructor vs Destructor in JS
+Constructor → special method (constructor()) that runs automatically when an object is created.
+Destructor → in traditional OOP, it runs automatically when an object is destroyed (like freeing memory).
+
+👉 But JavaScript does not have destructors because:
+JS has garbage collection → memory cleanup happens automatically.
+We don’t explicitly destroy objects.
+
+
+********
+🔹 Friend Function (in C++)
+A friend function is a special function that is not a member of a class, but it has access to the private and protected members of that class.
+
+Example:
+class Box {
+  private:
+      int length;
+
+  public:
+      Box() : length(0) {}
+
+      // friend function declaration
+      friend void setLength(Box &b, int l);
+};
+
+// friend function definition
+void setLength(Box &b, int l) {
+    b.length = l;  // accessing private member
+    cout << "Length set to: " << b.length << endl;
+}
+
+********
+🔹 Virtual Function in C++
+A virtual function is a member function in a base class that you expect to be overridden in derived classes.
+
+Example:
+class Base {
+public:
+    virtual void show() {   // virtual function
+        cout << "Base class show()" << endl;
+    }
+};
+class Derived : public Base {
+public:
+    void show() override {   // override keyword is optional
+        cout << "Derived class show()" << endl;
+    }
+};
+
+
+**********
+🔹 Pure Virtual Function in C++
+A pure virtual function is a virtual function with no implementation in the base class.
+
+It is declared by assigning = 0 in the declaration.
+👉 A class containing at least one pure virtual function becomes an abstract class, and you cannot create objects of it.
+👉 Only derived classes that override the function can be instantiated.
+
+Example:
+class Base {
+public:
+    virtual void display() = 0;  // pure virtual function
+};
+
+
+***********
+🔹 Abstract Classes in C++
+An abstract class is a class that cannot be instantiated (you cannot create objects of it) and is meant to be inherited by other classes.
+
+It usually contains at least one pure virtual function.
+👉 Abstract classes act like a blueprint for derived classes.
+
+Example:
+class AbstractClass {
+public:
+    virtual void display() = 0;  // pure virtual function → makes this class abstract
+};

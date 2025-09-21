@@ -1,0 +1,23 @@
+Q. How does React's reconciliation algorithm work?
+
+Based on the differences identified, React determines the most efficient way to update the real DOM. Only the parts of the real DOM that need to be updated are changed, rather than re-rendering the entire UI. This selective updating is quick and performant.
+
+Here are the key points about React's reconciliation algorithm:
+
+1. Virtual DOM Comparison: React creates a new virtual DOM tree in response to state or prop changes and uses a diffing strategy to compare it with the previous tree.
+
+2. Deferred DOM Updates: React does not immediately write to the DOM but uses the reconciliation algorithm to determine the best way to update it.
+
+3. Assumptions for Performance:
+Different Types, Different Trees: Two elements of different types will produce different trees.
+Stable Elements with Keys: Developers can use unique key props to hint at which child elements may remain stable across renders.
+
+4. Root Element Check:
+Different Types: If root elements are of different types, React rebuilds the tree from scratch.
+Same Type: If root elements are the same type, only changed attributes are updated.
+
+5. Child Elements Diffing: The algorithm recursively applies the diffing process to child elements, using the key prop for lists to match items between old and new trees.
+
+6. Performance Optimization: Using good keys can significantly enhance performance by helping React efficiently identify changes, additions, and removals.
+
+7. High Performance: The reconciliation algorithm ensures React updates the real DOM efficiently, maintaining high performance as application complexity grows.

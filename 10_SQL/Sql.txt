@@ -1,0 +1,184 @@
+🔒 Deadlock
+Definition: Two (or more) processes wait forever because each is holding a resource the other needs.
+Key idea: No one makes progress.
+Example:
+Process A holds Resource X and waits for Resource Y.
+Process B holds Resource Y and waits for Resource X.
+Neither can move forward → system stuck.
+
+🔄 Livelock
+Definition: Two (or more) processes keep changing state in response to each other but still make no progress.
+Key idea: They’re active but still stuck.
+Example:
+Two people walking in a narrow hallway try to avoid each other:
+Both step left → still blocked.
+Both step right → still blocked.
+They keep moving but never pass each other.
+
+********
+
+🔹 Clustered Index
+Definition: A clustered index determines the physical order of data in the table.
+Think of it as the main phonebook sorted by last name → the book itself is physically ordered.
+A table can have only one clustered index (because data can only be physically sorted one way).
+In SQL databases, usually the primary key becomes the clustered index.
+
+Example: If you create a clustered index on UserID, the data in the table will be physically stored as:
+1 | Anil | 25
+2 | Sita | 28
+3 | Ravi | 30
+
+🔹 Non-Clustered Index
+Definition: A non-clustered index is like a separate lookup table (an extra copy).
+It does not change the physical order of data in the table. Instead, it stores a pointer (reference) to the row in the clustered index (or heap if no clustered index exists).
+A table can have many non-clustered indexes (like multiple indexes in a book).
+
+Example: It creates a structure like:
+Index on Name:
+Anil -> Row at UserID=1
+Ravi -> Row at UserID=3
+Sita -> Row at UserID=2
+
+*********
+
+🔹 1. Database Partitioning
+👉 Definition: Breaking a single table into smaller, more manageable pieces called partitions.
+All partitions are still part of the same database server/instance.
+It improves performance and manageability, but it’s still one system.
+Purpose: Improve query performance by reducing the amount of data scanned.
+
+Horizontal partitioning is row-based, focusing on distributing the dataset’s rows across partitions.
+
+Vertical partitioning is column-based, aiming to separate less-used columns into different partitions or tables.
+
+🔹 2. Database Sharding
+👉 Definition: Distributing data across multiple independent databases/servers (called shards).
+Each shard is a separate database instance with its own storage and resources.
+Together, they make up one logical database.
+Purpose: Horizontal scaling to handle large volumes of data and high query loads.
+
+*********
+
+🔹 Indexing
+👉 What it is:
+Indexing creates a data structure (like a sorted catalog / B-tree / hash) that makes lookups faster.
+Instead of scanning the whole table, the database engine can jump directly to the required rows using the index.
+
+🔹 Denormalization
+👉 What it is:
+Denormalization is about adding redundancy to avoid expensive joins.
+You copy or pre-store data in the same table that you’d otherwise fetch by joining multiple normalized tables.
+
+
+*********
+
+🔹 Types of Temporary Table:
+Temporary tables are tables that exist only for the duration of a session or a transaction. They are useful for storing intermediate results, simplifying complex queries, or performing operations on subsets of data without modifying the main tables.
+1. Local Temporary Tables:
+- Prefixed with # (e.g., #TempTable).
+- Only visible to the session that created them.
+- Automatically dropped when the session ends.
+
+```
+CREATE TABLE #LocalTemp (ID INT);
+```
+
+2. Global Temporary Tables:
+- Prefixed with ## (e.g., ##GlobalTempTable).
+- Visible to all sessions.
+- Dropped when all sessions that reference them are closed.
+
+```
+CREATE TABLE ##GlobalTemp (ID INT);
+```
+
+🔹 Types of View:
+A view is a virtual table created by a SELECT query. It does not store data itself, but presents data from one or more tables in a structured way. Views simplify complex queries, improve readability, and enhance security by restricting access to specific rows or columns.
+1. Standard View: 
+- A virtual table defined by a query.
+- Does not store data; the underlying query is executed each time the view is referenced.
+- A standard view shows real-time data.
+
+```
+-- Create a view to show only active users
+CREATE VIEW active_users AS
+SELECT id, name, email
+FROM users
+WHERE status = 'active';
+
+-- Use it
+SELECT * FROM active_users;
+```
+
+2. Materialized View:
+- A physical table that stores the result of the query.
+- Data is precomputed and stored, making reads faster.
+- Requires periodic refreshes to keep data up to date.
+- Materialized view is used to store aggregated sales data, updated nightly, for fast reporting.
+
+```
+-- Create a materialized view to store daily sales summary
+CREATE MATERIALIZED VIEW daily_sales_summary AS
+SELECT product_id, SUM(amount) AS total_sales, DATE(order_date) AS sales_date
+FROM sales
+GROUP BY product_id, DATE(order_date);
+
+-- Refresh manually
+REFRESH MATERIALIZED VIEW daily_sales_summary;
+
+-- Query it
+SELECT * FROM daily_sales_summary;
+```
+
+**********
+
+🔹 Bitmap Vs B-Tree
+1. Bitmap Index:
+- Represents data with bitmaps (arrays of bits) to indicate the presence or absence of a value in each row.
+- Efficient for low-cardinality columns, such as “gender” or “yes/no” fields.
+- Can perform fast logical operations (AND, OR, NOT) on multiple columns simultaneously.
+
+2. B-tree Index:
+- Uses a balanced tree structure to store indexed data in a sorted order.
+- Suitable for high-cardinality columns (e.g., unique identifiers, large ranges of values).
+- Supports range-based queries efficiently.
+
+**********
+🔹 Window Function:
+A window function in SQL performs a calculation across a set of rows that are related to the current row — without collapsing them into a single row (unlike GROUP BY).
+
+Common Window Functions
+Ranking functions: RANK(), DENSE_RANK(), ROW_NUMBER()
+Aggregate functions as windows: SUM() OVER(), AVG() OVER(), COUNT() OVER()
+Analytic functions: LEAD(), LAG(), FIRST_VALUE(), LAST_VALUE()
+
+
+*********
+🔹 STORE PROCEDURE
+A stored procedure in SQL is like a function: you save a block of SQL code on the database server and then call it whenever you need.
+
+```
+CREATE PROCEDURE GetAllStudents
+AS
+BEGIN
+    SELECT * FROM Students;
+END;
+
+EXEC GetAllStudents;
+-- or
+CALL GetAllStudents;  -- (in MySQL/PostgreSQL)
+
+```
+```
+With Params:
+CREATE PROCEDURE GetStudentById
+    @StudentId INT
+AS
+BEGIN
+    SELECT * FROM Students WHERE Id = @StudentId;
+END;
+
+EXEC GetStudentById @StudentId = 5;
+-- or shorter
+EXEC GetStudentById 5;
+```

@@ -1,0 +1,18 @@
+1.ENCRYPTION 
+it is a two way communication
+it is not a secure method because u can decode the encripted value and easily find the real value 
+
+
+ANIL ---> encode [234asdfas234]
+[234asdfas234] decode ---> ANIL
+
+
+
+
+
+2.HASHING
+it is a one way communication
+you are unable to decode it 
+bcryptJs (round 12) - it will took 3 years to hack
+
+ANIL ---> hash [2fh4fj1hg2f34hf2j3234g1lhl];

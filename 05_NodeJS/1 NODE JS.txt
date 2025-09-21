@@ -1,0 +1,175 @@
+1. Difference between setImmediate() and process.nextTick() methods
+
+console.log('Start');
+
+// This schedules a callback to be executed after the current operation completes, but before the event loop continues. So, it will execute after the current stack finishes, but before any I/O events or setImmediate callbacks.
+process.nextTick(() => {
+    console.log('process.nextTick callback');
+});
+
+// This schedules a callback to be executed on the next iteration of the event loop, which means after all I/O events' callbacks.
+setImmediate(() => {
+    console.log('setImmediate callback');
+});
+
+console.log('End');
+
+// output:
+Start
+End
+process.nextTick callback
+setImmediate callback
+
+
+*************
+
+Clusters and Child Processes
+CLUSTER
+Clusters in Node.js allow you to create multiple instances of your Node.js application that can run on multiple CPU cores. This helps in distributing the load and improving performance. Clustering involves the creation of worker processes that share the same server port.
+
+**Example Code for Clusters:**
+
+const cluster = require('cluster');
+const http = require('http');
+const os = require('os');
+
+if (cluster.isMaster) {
+    const numCPUs = os.cpus().length;
+
+    console.log(`Master ${process.pid} is running`);
+
+    // Fork workers
+    for (let i = 0; i < numCPUs; i++) {
+        cluster.fork();
+    }
+
+    cluster.on('exit', (worker, code, signal) => {
+        console.log(`Worker ${worker.process.pid} died`);
+    });
+} else {
+    // Workers can share any TCP connection
+    http.createServer((req, res) => {
+        res.writeHead(200);
+        res.end('Hello, world!\n');
+    }).listen(8000);
+
+    console.log(`Worker ${process.pid} started`);
+}
+
+
+- **Explanation:**
+  - If the script is run as the master process (`cluster.isMaster`), it will fork a worker process for each CPU core.
+  - Each worker process runs the HTTP server, allowing the load to be distributed across multiple processes.
+  - When a worker exits, an event is logged.
+
+
+
+CHILD PROCESSES
+Child processes in Node.js allow you to spawn new processes and communicate with them. You can create child processes using the `child_process` module with methods like `spawn`, `fork`, `exec`, and `execFile`.
+
+**Example Code for Child Processes:**
+
+1. **Using `spawn`:**
+Think of spawn like asking a friend to do a task for you. You give them specific instructions on what to do, and they start doing it right away. While they are working, they can keep telling you how it's going, and you can listen to them. When they finish, they let you know.
+
+const { spawn } = require('child_process');
+
+const ls = spawn('ls', ['-lh', '/usr']);
+
+ls.stdout.on('data', (data) => {
+    console.log(`stdout: ${data}`);
+});
+
+ls.stderr.on('data', (data) => {
+    console.error(`stderr: ${data}`);
+});
+
+ls.on('close', (code) => {
+    console.log(`child process exited with code ${code}`);
+});
+
+
+- **Explanation:**
+  - `spawn` is used to launch a new process (in this case, the `ls` command with arguments `-lh /usr`).
+  - You can listen to the `stdout` and `stderr` streams to get output from the child process.
+  - The `close` event is fired when the child process exits.
+
+2. **Using `fork`:**
+Now, think of fork like having a little helper who understands you perfectly because they are a smaller version of you. You can give them a special task, and they can also tell you what they are doing. You both can talk to each other easily.
+
+const { fork } = require('child_process');
+
+const child = fork('child.js');
+
+child.on('message', (message) => {
+    console.log('Message from child', message);
+});
+
+child.send({ hello: 'world' });
+
+
+**`child.js`**
+
+process.on('message', (message) => {
+    console.log('Message from parent:', message);
+    process.send({ reply: 'hello from child' });
+});
+
+
+- **Explanation:**
+  - `fork` is a specialized version of `spawn` used to create Node.js child processes.
+  - Parent and child processes can communicate via `process.send` and `process.on('message')`.
+
+### Summary
+
+- **Clusters**: Used to create multiple instances of a Node.js application, utilizing multiple CPU cores for better performance. Each instance runs as a worker process.
+- **Child Processes**: Used to spawn new processes for executing commands or running scripts. They can communicate with the parent process, allowing for distributed workloads and separation of concerns.
+
+*************
+
+// Import the redis module
+const redis = require("redis");
+
+// Create a new Redis client
+let client = redis.createClient();
+
+// Listen for the 'connect' event to confirm connection
+client.on("connect", function () {
+    console.log("Connection Successful!!");
+});
+
+// Set a key-value pair in Redis (Key -> Intern, Value -> gfg)
+client.set("Intern", "gfg", (err, stu) => {
+    if (err) {
+        // Log any errors
+        console.log(err);
+    } else {
+        // Log success message
+        console.log(stu); // Expected output: 'OK'
+    }
+});
+
+// Get the value of the key 'Intern' from Redis
+client.get('Intern', (err, reply) => {
+    if (err) {
+        // Log any errors
+        console.log(err);
+    } else {
+        // Log the retrieved value
+        console.log(reply); // Expected output: 'gfg'
+    }
+});
+
+// Set multiple fields in a hash named 'Interns' in Redis
+client.hmset("Interns", { pos: "Tech Writer", Org: "GFG" });
+
+// Get all fields and values of the hash 'Interns' from Redis
+client.hgetall("Interns", (err, stu) => {
+    if (err) {
+        // Log any errors
+        console.log(err);
+    } else {
+        // Log the retrieved hash
+        console.log(stu); // Expected output: { pos: 'Tech Writer', Org: 'GFG' }
+    }
+});

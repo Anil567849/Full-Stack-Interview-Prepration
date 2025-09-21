@@ -1,0 +1,65 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Document1
+
+        style 
+            include ../static/style.css
+    body 
+        nav#navbar.navClass.myClass.container 
+            ul 
+                li #[a(href="/") Home  ]
+                li #[a(href="/") About]
+                li #[a(href="/") Services]
+                li #[a(href="./contact") Contact Us]
+                li #[a(href="/") Class Info ]
+        
+        section#introSection 
+            | section intro 
+        
+        
+        section#OurMissonSection 
+            h1 OUR MISSION 
+
+            div.container
+                div.card 
+                    h4 DANCE PERFECT
+                    div.card-img
+                        img(src="/static/d1.png")
+            
+                div.card 
+                    h4 DANCE PE CHANCE
+                    div.card-img
+                        img(src="/static/d2.png")
+            
+                div.card 
+                    h4 AMAZING PERFECTION
+                    div.card-img
+                        img(src="/static/d3.png")   
+        
+
+        section#sponserSection 
+            | section Sponser
+
+
+            div#sponserContainer 
+            
+
+
+
+
+
+
+
+
+
+
+
+        footer#footer 
+            | Amazing Footer
+
+    script 
+        include ../static/index.js

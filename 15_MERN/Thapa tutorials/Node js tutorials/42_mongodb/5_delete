@@ -1,0 +1,14 @@
+
+
+syntax = db.collection.deleteMany(<filter>);
+
+
+delete first document which satisfiy th condition
+1.db.userInfo.deleteOne({lang : "lisp"});
+
+
+2. db.userInfo.deleteMany({lang : "basic"});
+
+
+delele whole document completely empty
+3. db.userInfo.deleteMany({});

@@ -1,0 +1,48 @@
+
+eg: database name is userDatabase;
+collection == table
+syntax = db.collection.find(query, projections);
+
+
+find all
+1. db.userInfo.find();
+
+
+pretty 
+2. db.userInfo.find().pretty();
+
+
+using query 
+it is case-sensative So [if your query anil and in Database "A" is capital so you will get nothing] 
+3. db.userInfo.find({name : "Anil"});
+
+
+using query and projections
+watch only skill row [field]
+    1 == true; show skill field only
+    0 == false; don't show skill field only
+
+
+4. db.userInfo.find({name : "Anil"}, {skill : 1});
+4. db.userInfo.find({name : "Anil"}, {skill : 0});
+
+
+multiple projections and hide id field
+5. db.userInfo.find({name : "Anil"}, {_id : 0, skill : 1});
+
+
+
+get first result only 
+6. db.userInfo.find({name : "Anil}).limit(1);
+
+6. db.userInfo.findOne({name : "Anil}));
+
+
+
+limit
+7. db.userInfo.find({name : "Anil}).limit(10);
+
+
+skip
+skip 1st result and show 2nd only 
+8. db.userInfo.find({name : "Anil"}).limit(1).skip(1);  

@@ -1,0 +1,19 @@
+{
+  "name": "exp",
+  "version": "1.0.0",
+  "description": "this is my first express app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "anil",
+  "license": "ISC",
+  "keywords": [
+    "anil"
+  ],
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.13",
+    "pug": "^3.0.2"
+  }
+}

@@ -1,0 +1,137 @@
+1
+MongoDB uses indexing in order to make the query processing more efficient. If there is no indexing, then the MongoDB must scan every document in the collection and retrieve only those documents that match the query. Indexes are special data structures that stores some information related to the documents such that it becomes easy for MongoDB to find the right data file. The indexes are ordered by the value of the field specified in the index. 
+
+Creating an Index : 
+    db.COLLECTION_NAME.createIndex({KEY:1}) 
+    db.mycol.createIndex({“age”:1})
+    {
+    “createdCollectionAutomatically” : false,
+    “numIndexesBefore” : 1,
+    “numIndexesAfter” : 2,
+    “ok” : 1
+    } 
+
+Drop an index: 
+db.NAME_OF_COLLECTION.dropIndex({KEY:1}) 
+db.NAME_OF_COLLECTION.dropIndexes({KEY1:1, KEY2: 1}) 
+db.NAME_OF_COLLECTION.getIndexes()
+
+
+2. 
+Cursor in MongoDB
+The MongoDB cursor is a pointer that references the documents of the collection returned by the find() method.
+The cursor is used to access the documents.
+
+This find() method returns a cursor containing all documents present in the student collection.
+db.student.find().pretty()
+
+How to Manually Iterate a Cursor in MongoDB
+var mycursor = db.student.find({studentId:3}).pretty()  
+
+we iterate the cursor manually
+
+    while(mycursor.hasNext()){
+    ... print(tojson(mycursor.next()));
+    ... }
+
+    mycursor.forEach(printjson)
+
+    var docs = mycursor.toArray()
+    var resultdoc = docs[0]
+
+
+
+2.
+MongoDB aggregation
+MongoDB aggregation operations process the data records/documents and return computed results. It collects values from various documents, groups them, and then performs different types of operations on that grouped data like sum , average , minimum , maximum , etc to return a computed result.
+
+MongoDB provides three ways to perform aggregation
+
+    1. Aggregation Pipelines: Aggregation pipelines in MongoDB consist of stages and each stage transforms the document. It is a multi-stage pipeline and in each state, the documents are taken as input to produce the resultant set of documents.
+
+    2. Map Reduce Function: Map reduce is used for aggregating results for the large volume of data.
+    
+    3. Single Purpose Aggregation: It is used when we need simple access to document like counting the number of documents or for finding all distinct values in a document.
+
+
+
+3. 
+SHARD
+Sharding = horizontal partitioning of data.
+✅ If userId is the shard key:
+Users 1–1000 might go to Shard A
+Users 1001–2000 might go to Shard B
+And so on...
+
+✅ Components of a Sharded Cluster
+MongoDB sharded architecture has 3 main parts:
+    1. Shard → Holds a subset of data (can itself be a replica set for fault tolerance).
+    2. Config Servers → Store metadata (like which shard contains which chunk of data).
+    3. Mongos Router → The query router. Applications connect to Mongos, and it routes queries to the correct shard(s).
+    4. Sharding key -> It determines how data is distributed across multiple shards (database partitions) in a sharded cluster. MongoDB uses a field in the document to decide which shard should store the document. Choosing an appropriate sharding key is crucial for even data distribution and efficient queries.
+
+✅ Sharding strategies
+Range-based sharding
+Hash-based sharding
+Tag-aware sharding
+
+4.
+READ AND WRITE CONCERN
+MongoDB has read concern and write concern, which define how strictly MongoDB ensures consistency, durability, and acknowledgement of operations.
+
+1. Write Concern
+It tells MongoDB how much acknowledgement you want when writing data.
+👉 In other words, it defines the level of guarantee that a write operation has been propagated to replica set members.
+Options:
+w: 0 → Unacknowledged writes. MongoDB doesn’t confirm anything. (Fastest, but unsafe).
+w: 1 (default) → Acknowledged by the primary only. (Fast, but less safe).
+w: "majority" → Acknowledged after the majority of replica set members have written it (Safer).
+w: n → Acknowledged after n replica set members confirm.
+👉 Extra option:
+j: true → Ensure the write is committed to the journal (disk) before acknowledging.
+Example: { w: "majority", j: true } → very durable, but slower.
+
+2. Read Concern
+It defines the consistency and isolation level for reading data.
+👉 In other words, from which state of data (committed/uncommitted/majority-confirmed) you want MongoDB to return results.
+
+Levels:
+"local" (default) → Returns the latest data from the primary, without waiting for replication. (Fast but may be uncommitted).
+"available" → Reads from secondary even if not caught up (may be stale).
+"majority" → Returns data that has been written to a majority of nodes (more consistent).
+"linearizable" → Strictest; ensures you always read the most recent acknowledged write (very slow, rarely used).
+"snapshot" → Used in transactions; provides a consistent snapshot of the data at a point in time.
+
+
+5.
+🔹 What is Denormalization in MongoDB?
+
+Denormalization means embedding related data into a single document instead of separating it into multiple collections.
+
+👉 In relational databases (like MySQL/Postgres), we normalize data into multiple tables to avoid duplication.
+👉 In MongoDB, since documents can store complex/nested objects, we often denormalize (duplicate) data for performance reasons.
+
+❌
+// users collection
+{
+  _id: 1,
+  name: "Anil"
+}
+// orders collection
+{
+  _id: 101,
+  userId: 1,
+  product: "Laptop"
+}
+
+✅
+Denormalized (MongoDB style)
+You embed the user directly into the order document:
+{
+  _id: 101,
+  product: "Laptop",
+  user: {
+    _id: 1,
+    name: "Anil"
+  }
+}

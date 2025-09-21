@@ -1,0 +1,17 @@
+
+
+see all databases
+1. show dbs
+
+
+create or use database
+2. use <name of database>
+    use userDatabase
+
+
+to see which database you are in 
+3. db 
+
+
+see all tables
+4. show collections

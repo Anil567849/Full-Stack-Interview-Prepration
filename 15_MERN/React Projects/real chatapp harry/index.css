@@ -1,0 +1,78 @@
+.logo {
+  display: block;
+  margin: auto;
+  width: 50px;
+  height: 50px;
+}
+
+body {
+  overflow: hidden;
+  background-image: url("https://i.pinimg.com/564x/ab/ab/60/abab60f06ab52fa7846593e6ae0c9a0b.jpg");
+}
+
+.msgBody {
+  height: 100vh;
+  width: 100vw;
+  margin: auto;
+}
+
+.container {
+  max-width: 955px;
+  margin: auto;
+  height: 70vh;
+  box-shadow: 2px 3px 4px 5px white;
+  padding: 20px;
+  overflow-y: scroll;
+}
+
+.message {
+  background-color: black;
+  color: white;
+  border-radius: 102px;
+  padding: 10px;
+  min-width: 100px;
+  max-width: 300px;
+  margin: 5px;
+  font-weight: 500;
+}
+
+.left {
+  margin-right: auto;
+}
+
+.right {
+  margin-left: auto;
+}
+
+.send {
+  width: 955px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.send-container {
+  display: flex;
+}
+
+
+#send-container input {
+    border-radius: 100px;
+    outline: none;
+    width: 700px;
+    height: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+
+
+#send-container button {
+    padding: 10px 40px;
+    color: white;
+    background-color: #337AB7;
+    font-weight: 500;
+    border-radius: 100px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}

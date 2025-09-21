@@ -1,0 +1,30 @@
+
+//client 1
+const peerConnection = new RTCPeerConnection();;
+const dataChannel = peerConnection.createDataChannel('bigData');
+dataChannel.onopen = () => console.log('Channel Opened');
+dataChannel.onmessage = (e) => console.log("message", e.data);
+peerConnection.onicecandidate = () => console.log("ice candidate", JSON.stringify(peerConnection.localDescription));
+const offer = peerConnection.createOffer();
+peerConnection.setLocalDescription(offer);
+const answer = uska answer likho ider
+peerConnection.setRemoteDescription(answer);
+dataChannel.send('hlo');
+
+
+client 2
+const peerConnection = new RTCPeerConnection();
+const offer = uska offer ider likho
+peerConnection.onicecandidate = () => console.log('ice candidate', JSON.stringify(peerConnection.localDescription));
+peerConnection.setRemoteDescription(offer)
+await peerConnection.setRemoteDescription(offer)
+let dataChannel;
+peerConnection.ondatachannel = (e) => {
+    dataChannel = e.channel;
+    dataChannel.onopen = () => console.log('channel opened');
+    dataChannel.onmessage = (event) => console.log("message ", event.data);
+}
+const answer = await peerConnection.createAnswer();
+peerConnection.setLocalDescription(answer;)
+peerConnection.setLocalDescription(answer);
+dataChannel.send('hlo');

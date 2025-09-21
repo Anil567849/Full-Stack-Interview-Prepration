@@ -1,0 +1,40 @@
+
+
+
+terminal commands
+
+
+1 create new empty file
+
+type null > myNewFile
+
+
+1.1 create new directory
+
+mkdir myFolder
+
+2 enter into repl
+
+node 
+
+3 user _ (underscore) to access last variable -- auto fetch ho jayega last variable
+
+var a = 2;
+_
+
+4 enter into editor
+
+.editor
+
+5 exit
+
+.exit 
+
+6 help - check all inbuilt function
+
+do baar tab dvao
+
+
+7 watch all function inside module sirf module ka naam likho
+
+fs

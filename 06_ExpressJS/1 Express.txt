@@ -1,0 +1,91 @@
+***********
+app.use(): This method is used to mount middleware functions in the application's request handling pipeline.
+// Example middleware function
+const loggerMiddleware = (req, res, next) => {
+    console.log('Request received:', req.method, req.url);
+    next(); // Call the next middleware in the stack
+};
+// Mounting middleware to handle all requests
+app.use(loggerMiddleware);
+
+***********
+
+app.set(): This method is used to set various application settings.
+
+// Setting the view engine to use EJS
+app.set('view engine', 'ejs');
+
+// Setting a custom variable
+app.set('pageTitle', 'My Express App');
+
+
+*************
+
+Types of middleware
+
+// Application-level middleware
+// This middleware parses incoming JSON requests
+app.use(express.json());
+
+// This middleware serves static files from the 'public' directory
+app.use(express.static('public'));
+
+// Router-level middleware
+// Define a router for a specific group of routes
+const router = express.Router();
+
+// This middleware logs information for all requests to this router
+router.use((req, res, next) => {
+    console.log('Router-level middleware');
+    next(); // Pass control to the next middleware function
+});
+
+// Route handler for the router
+router.get('/', (req, res) => {
+    res.send('Hello from router!');
+});
+
+// Mount the router at the '/api' endpoint
+app.use('/api', router);
+
+// Error-handling middleware
+// This middleware catches and handles errors
+app.use((err, req, res, next) => {
+    console.error(err.stack); // Log the error stack
+    res.status(500).send('Something broke!'); // Send a 500 response
+});
+
+// Built-in middleware
+// This middleware parses URL-encoded requests
+app.use(express.urlencoded({ extended: true }));
+
+
+************
+
+BODY PARSER
+body-parser is a middleware in Express that parses the body of incoming HTTP requests so you can access it easily.
+Example: When you send JSON or form data from the frontend, it arrives as raw bytes. Express doesn’t automatically turn that into a usable JavaScript object.
+Since Express v4.16+, body-parser is built-in → you just use express.json() and express.urlencoded().
+
+
+************
+COOKIE PARSER
+cookie-parser parses cookies attached to the client request (in the HTTP header Cookie) and makes them available in req.cookies.
+
+With cookie parser:
+// Incoming header: Cookie: sessionId=abc123; theme=dark
+app.get("/", (req, res) => {
+  console.log(req.headers.cookie); 
+  // ❌ "sessionId=abc123; theme=dark" (just a string)
+});
+
+
+With cookie parser:
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
+
+app.get("/", (req, res) => {
+  console.log(req.cookies); 
+  // ✅ { sessionId: "abc123", theme: "dark" }
+});
+

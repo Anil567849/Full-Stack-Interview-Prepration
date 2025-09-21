@@ -1,0 +1,43 @@
+
+2. if you want to use [ import a from 'a'] format = so put [type="module"] in package.json in server side;
+	* now always use extension [eg. import file from 'file.js']
+	* if type="module" use nhi kiya to [extension nhi lgana pdta]
+
+
+3. nodejs me  [ module.export = FunctionName/ClassName ] se export hota h
+    reactjs me  [ export functionName] se export hota h
+
+
+4.EXPORT OLD WAY
+// default export - while importing u can use any name which {}
+module.exports = function defaultExportedFunction() {};
+// named export- not defalut - while importing u have to use same same name
+module.exports = {
+  something,
+  anotherThing,
+};
+
+5.NEW EXPORT WAY
+There's a new, and better (of course!) standard that's recently been introduced to Node.js called ECMAScript modules. 
+It's a pretty simple and elegant way of handling module exporting. The gist of it can be summed up with the default export being:
+
+export default function exportedFunction() {}
+and the named export looking like this:
+
+// named exports on separate LOC
+export const constantString = "CONSTANT_STRING";
+export const constantNumber = 5;
+// consolidated named exports
+export default {
+  constantString,
+  constantNumber,
+};
+These values can then easily be imported on the receiving end, like this:
+
+// default exported value
+import exportedFunction from "exporting-module.js";
+// import named exported values through object destructuring
+import { constantString, constantNumber } from "exporting-module.js";
+This results in no more confusion from module.exports vs exports and a nice, human-sounding syntax!
+
+There are definitely projects that are yet to be migrated to Node.js version 14 and above and so can't use this new syntax.

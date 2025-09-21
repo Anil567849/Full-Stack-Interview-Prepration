@@ -1,0 +1,131 @@
+===============================
+ MongoDB Aggregation Cheat Sheet
+===============================
+
+🔹 Common Aggregation Stages
+----------------------------
+$match      -> Filter documents (like WHERE in SQL)
+$group      -> Group documents (like GROUP BY in SQL). Use accumulators inside (e.g. $sum, $avg)
+$project    -> Reshape fields (like SELECT in SQL). Include/exclude/compute new fields
+$sort       -> Sort documents (like ORDER BY)
+$limit      -> Limit number of documents (like LIMIT in SQL)
+$skip       -> Skip documents (useful for pagination)
+$unwind     -> Deconstruct array into separate documents (flatten arrays)
+$lookup     -> Join two collections (like LEFT JOIN in SQL)
+$addFields  -> Add or modify fields
+$count      -> Count documents
+$facet      -> Run multiple pipelines in parallel
+$bucket     -> Group documents into ranges
+$bucketAuto -> Automatically group into ranges
+$replaceRoot / $replaceWith -> Replace entire document with a sub-field
+
+🔹 Common Accumulators (used inside $group)
+------------------------------------------
+$sum        -> Sum values
+$avg        -> Average values
+$min        -> Minimum value
+$max        -> Maximum value
+$push       -> Push values into an array
+$addToSet   -> Push unique values (like DISTINCT)
+$first      -> First value in the group
+$last       -> Last value in the group
+
+🔹 Common Expressions (used inside $project, $addFields, etc.)
+-------------------------------------------------------------
+$multiply   -> Multiply values
+$divide     -> Divide values
+$add        -> Add numbers
+$subtract   -> Subtract numbers
+$concat     -> Join strings
+$toUpper    -> Convert string to uppercase
+$toLower    -> Convert string to lowercase
+$substr     -> Substring
+$cond       -> Conditional (if/else)
+$ifNull     -> Replace null values
+$arrayElemAt -> Get element from array by index
+$size       -> Length of array
+$in         -> Check if value exists in array
+
+===============================
+Note: MongoDB has 50+ operators,
+but in practice, you’ll use the
+top 10–15 most frequently.
+===============================
+
+
+
+
+===============================
+Question: 1
+===============================
+🙋 Question:
+{
+  "orderId": 1,
+  "customer": "John",
+  "items": [
+    { "product": "Laptop", "price": 1000, "quantity": 1 },
+    { "product": "Mouse", "price": 50, "quantity": 2 }
+  ],
+  "status": "delivered"
+}
+Write an aggregation pipeline that calculates the total amount spent per customer (sum of price × quantity across all their orders).
+
+✅ Answer:
+db.orders.aggregate([
+  {
+    $unwind: "$items" // flatten the items array
+  },
+  {
+    $group: {
+      _id: "$customer",
+      totalSpent: {
+        $sum: { $multiply: ["$items.price", "$items.quantity"] }
+      }
+    }
+  }
+])
+
+
+
+===============================
+Question: 2
+===============================
+🙋 Question:
+orders
+{
+  "orderId": 1,
+  "customerId": 101,
+  "total": 250
+}
+customers
+{
+  "customerId": 101,
+  "name": "John",
+  "city": "Delhi"
+}
+Write an aggregation pipeline that joins these two collections so that each order shows the customer’s name and city along with the orderId and total.
+
+✅ Answer:
+db.orders.aggregate([ // orders [left table]
+  {
+    $lookup: { // left join
+      from: "customers",          // collection to join
+      localField: "customerId",   // field from orders
+      foreignField: "customerId", // field from customers
+      as: "customerDetails"
+    }
+  },
+  {
+    $unwind: "$customerDetails",
+    // $unwind: "$otherCollection"
+  },
+  {
+    $project: {
+      _id: 0,
+      orderId: 1,
+      total: 1,
+      customerName: "$customerDetails.name",
+      city: "$customerDetails.city"
+    }
+  }
+])

@@ -1,0 +1,27 @@
+
+
+it will update first document [row] which satisfiy the condition
+syntax = db.collection.updateOne(<filter>, <update>);
+
+syntax = db.collection.updateMany(<filter>, <update>);
+
+
+
+
+
+
+
+update one 
+1. db.userInfo.updateOne({lang : "c++"}, {$set: {lang : "Full Stack"}});
+1. db.userInfo.updateOne({name : "Anil"} {$set: {status : "first"}});
+
+
+
+
+
+
+
+
+update many 
+2. db.userInfo.updateMany({lang : "c++"}, {$set: {lang : "Full Stack"}});
+2. db.userInfo.updateMany({name : "Anil"}, {$set: {lang : "Java And Android"}});

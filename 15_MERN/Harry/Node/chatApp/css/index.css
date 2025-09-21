@@ -1,0 +1,56 @@
+
+body{
+    background-color: limegreen;
+}
+
+.mainSection{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+
+
+
+.container{
+    height: 60vh;
+    width: 70vw;
+    border: 2px solid black;
+    border-radius: 10px;
+    overflow-y: auto;
+}
+
+.receiver{
+    float: right;
+    clear: both;
+    max-width: 100px;
+    background-color: red;
+    padding: 20px;
+
+}
+
+.sender{
+    float: left;
+    clear: both;
+    max-width: 20rem;
+    background-color: red;
+    padding: 20px;
+
+}
+
+
+
+#form{
+    margin: 20px;
+}
+#form input{
+    padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+#form button{
+    padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}

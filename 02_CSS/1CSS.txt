@@ -1,0 +1,178 @@
+1
+In CSS, cascading refers to the process of combining multiple style rules and determining the final styles that will be applied to an element. 
+The CSS cascade operates based on three main factors, known as the "cascade order":
+
+Specificity: Specificity determines which styles are more relevant to an element based on the selectors used to target it. Styles with more specific selectors (e.g., IDs, classes, or element names) take precedence over less specific selectors.
+
+Importance: Importance allows certain styles to be given higher priority than others. You can use the !important declaration to make a style rule override any conflicting rules, regardless of specificity.
+
+Source Order: If two conflicting styles have the same specificity and importance, the style declared later in the CSS document or included later in the HTML document will take precedence. The last declaration wins.
+
+
+2
+<p id="h" class="ch">anil</p> // background will be red {p #h .ch has more priority}
+
+style
+p #h .ch{
+    background: red;
+}
+#h {
+    backround: blue;
+}
+
+How to Calculate Specificity?
+100 = for each ID value, 
+10 = for each class value (or pseudo-class or attribute selector), 
+1 = for each element selector or pseudo-element.
+0: universal operator [*]
+
+Note: Inline style gets a specificity value of 1000, and is always given the highest priority!
+Note 2: There is one exception to this rule: if you use the !important rule, it will even override inline styles!
+
+
+3
+What are Pseudo-Elements?
+A CSS pseudo-element is used to style specified parts of an element.
+
+For example, it can be used to:
+    Style the first letter, or line, of an element
+    Insert content before, or after, the content of an element
+
+    selector::pseudo-element {
+        property: value;
+    }
+
+Notice the double colon notation - ::first-line versus :first-line
+The double colon replaced the single-colon notation for pseudo-elements in CSS3.
+
+CSS - The ::marker Pseudo-element
+    The ::marker pseudo-element selects the markers of list items.
+
+    ::marker {
+        color: red;
+        font-size: 23px;
+    }
+CSS - The ::selection Pseudo-element
+    The ::selection pseudo-element matches the portion of an element that is selected by a user.
+
+    ::selection {
+        color: red;
+        background: yellow;
+    }
+
+
+
+4
+What are Pseudo-classes?
+A pseudo-class is used to define a special state of an element.
+
+For example, it can be used to:
+    Style an element when a user mouses over it
+    Style visited and unvisited links differently
+    Style an element when it gets focus
+
+
+    selector:pseudo-class {
+        property: value;
+    }
+
+Anchor Pseudo-classes
+    /* unvisited link */
+    a:link {
+        color: #FF0000;
+    }
+    /* visited link */
+    a:visited {
+        color: #00FF00;
+    }
+    /* mouse over link */
+    a:hover {
+        color: #FF00FF;
+    }
+    /* selected link */
+    a:active {
+        color: #0000FF;
+    }
+
+
+the selector matches any <p> element that is the first child of any element:
+p:first-child {
+  color: blue;
+}
+
+the selector matches the first <i> element in all <p> elements:
+p i:first-child { // p ke first child hone chahiye.
+  color: blue;
+}
+
+the selector matches all <i> elements in <p> elements that are the first child of another element
+p:first-child i { // p ke under kisi ke bhi first child hone chahiye.
+  color: blue;
+}
+
+5.
+CSS combinators are explaining the relationship between two selectors.
+General Sibling Selector ~:
+        It's like saying, "Select all the elements that come after this one and share the same parent."
+        Exapme; selector ~ selector
+Adjacent Sibling Selector +:
+        It's like saying, "Select the element right next to this one that shares the same parent."
+        Exapme; selector + selector
+Child Selector >:
+        It's like saying, "Select only the elements that are directly nested inside this parent element."
+        Exapme; selector > selector
+Descendant Selector (Space):
+        It's like saying, "Select all the elements inside this parent, no matter how deeply nested they are."
+        Exapme; selector  selector
+
+
+
+6.
+@import rule: The @import rule is used to import one style sheet into another style sheet.
+@import "navigation.css"; /* Using a string */
+or
+@import url("navigation.css"); /* Using a url */
+
+Import the "mobstyle.css" style sheet ONLY if the media is screen and the viewport is maximum 768 pixels:
+@import "mobstyle.css" screen and (max-width: 768px);
+
+
+7.
+Attribute Selector:
+[attribute]{
+    /* Styles*/
+}
+// OR
+element [attribute] {
+   /* Styles*/
+}
+// OR
+[attribute ="value"]
+{
+   /* Styles*/
+}
+
+
+
+7.
+units of measurement for various properties.
+
+Absolute Units:
+    px (Pixels): A pixel is a single dot on a screen. It's a fixed-size unit that does not change with the size of the viewing device.
+    pt (Points): A point is a unit of length used in typography. It's equivalent to 1/72 of an inch and is commonly used in print media.
+Relative Units:
+    em (pronounced "em"): Relative to the font-size of the element (2em means 2 times the size of the current font)
+    Example: <div>The font-size of the div element is set to 30px. <span>The span element inside the div element has a font-size of 0.5em, which equals to 0.5x30 = 15px</span>.</div>
+
+    rem (root em):: A unit relative to the font size of the root element (<html>). It provides a consistent sizing across the document, as it's not affected by nested elements.
+    % (Percentage): A unit relative to the parent element. For example, 50% sets the size to half of the parent element's size.
+Viewport Units:
+    vw (Viewport Width): A unit relative to the width of the viewport. 1vw is equal to 1% of the viewport width.
+    vh (Viewport Height): A unit relative to the height of the viewport. 1vh is equal to 1% of the viewport height.
+    vmin: A unit relative to the smaller dimension of the viewport (either width or height).
+    vmax: A unit relative to the larger dimension of the viewport (either width or height).
+Other Units:
+    cm (Centimeters): A unit of length in the metric system, equal to one hundredth of a meter.
+    mm (Millimeters): A unit of length equal to one thousandth of a meter.
+    in (Inches): A unit of length equal to one-twelfth of a foot.
+    pt (Points): As mentioned earlier, points are commonly used in typography.

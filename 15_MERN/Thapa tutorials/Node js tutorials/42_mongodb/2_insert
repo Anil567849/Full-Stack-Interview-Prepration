@@ -1,0 +1,15 @@
+    
+
+
+single insert
+    it will create table if not exitst and it will insert data or if table already exists so it will insert data
+    
+    1. db = it is your alias | that's why you can easily use db rather than using your real database name
+    2. userInfo = table or collection
+    3. {} = put objects | documents
+    Example: db.userInfo.insertOne({name : "Elon", from : "spaceX"})
+
+
+
+multiple insert
+2. db.entrepreneurs.insertMany([{name : "Elon"},{name : "Jeff"},{name : "Mark"},{name : "Anil"}]);

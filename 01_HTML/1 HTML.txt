@@ -1,0 +1,118 @@
+1 
+Semantic tags in HTML are elements that convey meaning about the content they enclose.
+<header> <nav> <main> <article> <section> <aside> <footer> <figure> and <figcaption> 
+
+Non-semantic tags are HTML elements that are used solely for presentation or formatting purposes, without conveying any specific meaning about the content they enclose.
+<div> <span> <font> 
+
+
+2.
+In HTML, the Document Type Declaration (DOCTYPE) is an instruction that specifies the version of HTML or XHTML in which the document is written.
+The DOCTYPE declaration helps web browsers to interpret and render the document correctly by indicating the version of HTML or XHTML being used and how the document should be parsed.
+
+<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+
+3.
+<canvas> and <svg>:
+Definition: <canvas> provides a drawing surface for dynamic, scriptable rendering of 2D shapes and bitmap images using JavaScript.
+
+    <canvas id="myCanvas" width="400" height="200"></canvas>
+
+    js
+    const canvas = document.getElementById('myCanvas');
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = 'red';
+    ctx.fillRect(50, 50, 100, 100);
+
+
+
+Definition: <svg> defines scalable vector graphics using XML-based markup, allowing creation and manipulation of vector graphics with CSS or JavaScript.
+
+    <svg width="400" height="200">
+    <circle cx="100" cy="100" r="50" fill="red" />
+    </svg>
+
+
+4. 
+We can create Element by any name:
+<Anil>hello</Anil> = it is valid and it's display type would be inline
+
+
+5. 
+inline: it will take space of it's content, We cannot give margin in y-direction. [we can give padding in all direction and margin in x direction]. in padding box size will increase but element will be in the same place, won't move. But in case of margin x - content will move
+
+two types of inline elements;
+1. replaced inline Elements: it comes through some source; [img, video, iframe] [we can give it height and width despite of being inline element]
+2. non replaced inline element; it doesn't come through some source: [so we can't give it height and width]; [span, i, b, strong, a]
+
+
+5.
+Box model: which determines how the total width and height of an element are calculated.
+content-box:
+With box-sizing: content-box;, the width and height of an element are calculated excluding the padding, border, and margin.
+
+border-box:
+With box-sizing: border-box;, the width and height of an element are calculated including the padding and border, but excluding the margin.
+
+
+inline-element doesn't follow box-model principle. it will just take any shape.
+<span>a;sdlkfsladfjlksd;flkj
+laksd;lfkj</span>
+
+
+6.
+HTML Entities
+<	less than		&lt;	&#60;	
+>	greater than		&gt;	&#62;	
+&	ampersand		&amp;	&#38;	
+"	double quotation mark	&quot;	&#34;	
+'	single quotation mark	&apos;	&#39;	
+¢	cent	&cent;		&#162;	
+£	pound	&pound;		&#163;	
+¥	yen	&yen;		&#165;	
+€	euro	&euro;		&#8364;	
+©	copyright		&copy;	&#169;	
+®	trademark		&reg;	&#174;
+
+
+
+7.
+void element: which doesn't need closing tags (img, br, hr);
+
+8.
+Data attribute
+The data-* attribute is used to store custom data private to the page or application.
+The data-* attribute gives us the ability to embed custom data attributes on all HTML elements.
+Syntax: data-* 
+
+<li onclick="showDetails(this)" id="owl" data-animal-type="bird">Owl</li>
+<script>
+function showDetails(animal) {
+  let animalType = animal.getAttribute("data-animal-type");
+  alert("The " + animal.innerHTML + " is a " + animalType + ".");
+}
+</script>
+
+
+
+9.
+The global attributes are attributes that can be used with all HTML elements.
+
+id: Specifies a unique identifier for an HTML element.
+class: Specifies one or more class names for an HTML element (used for styling with CSS).
+style: Specifies inline CSS styles for an HTML element.
+title: Specifies extra information about an element (often displayed as a tooltip).
+lang: Specifies the language of the element's content.
+dir: Specifies the text direction of the element's content (ltr for left-to-right, rtl for right-to-left).
+data-*: Allows you to store custom data attributes on an element.
+aria-*: Attributes for defining accessible Rich Internet Applications (ARIA).
+role: Defines the role of an element in accessibility.
+
+10.
+Element-specific Attributes: These attributes are specific to certain HTML elements and are not applicable to all elements. For example, the src attribute is specific to <img> and <script> elements, the href attribute is specific to <a> and <link> elements, etc.
+
+
+
+

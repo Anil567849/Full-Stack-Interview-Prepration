@@ -1,0 +1,359 @@
+1. React Component: In React, a component is a reusable and self-contained piece of UI that can be composed together to build complex user interfaces. Components can represent anything from simple elements like buttons or forms to more complex elements like navigation bars, modals, or entire pages.
+
+2. In React, components can be defined using either class syntax or function syntax.
+   Class Components: Class components are JavaScript classes that extend `React.Component` and have a `render()` method. The `render()` method returns the React element to be rendered. Class components can manage state using `this.state` and handle lifecycle methods such as `componentDidMount()`, `componentDidUpdate()`, etc.
+
+     Example of a class component:
+       ```jsx
+       class MyComponent extends React.Component {
+         render() {
+           return <div>Hello, World!</div>;
+         }
+       }
+       ```
+
+   Function Components: Function components are JavaScript functions that take props as an argument and return a React element. They are also known as "stateless" or "dumb" components because they do not manage their own state. With the introduction of React Hooks, function components gained the ability to manage state and use lifecycle methods, blurring the distinction between class components and function components.
+     Example of a function component:
+       ```jsx
+       function MyComponent(props) {
+         return <div>Hello, {props.name}!</div>;
+       }
+       ```
+-----------------------------------------------
+Lifecycle of Components: 
+	Each component in React has a lifecycle which you can monitor and manipulate during its three main phases.
+	The three phases are: Mounting, Updating, and Unmounting.
+
+1. Mounting
+	Mounting means putting elements into the DOM.
+	React has four built-in methods that gets called, in this order, when mounting a component:
+
+	1. constructor(): The constructor() method is called before anything else, when the component is initiated, and it is the natural place to set up the initial state and other initial values.
+	2. getDerivedStateFromProps(): The getDerivedStateFromProps() method is called right before rendering the element(s) in the DOM. This is the natural place to set the state object based on the initial props.
+  3. componentWillMount(): This function is invoked right before the component is mounted on the DOM.
+	4. render(): The render() method is required, and is the method that actually outputs the HTML to the DOM.
+	5. componentDidMount(): The componentDidMount() method is called after the component is rendered.
+
+2. Updating
+	The next phase in the lifecycle is when a component is updated.
+	A component is updated whenever there is a change in the component's state or props.
+	React has five built-in methods that gets called, in this order, when a component is updated:
+
+	1. getDerivedStateFromProps(): Also at updates the getDerivedStateFromProps method is called. This is the first method that is called when a component gets updated. This is still the natural place to set the state object based on the initial props.
+	2. shouldComponentUpdate(): In the shouldComponentUpdate() method you can return a Boolean value that specifies whether React should continue with the rendering or not. The default value is true.
+	3. render(): The render() method is of course called when a component gets updated, it has to re-render the HTML to the DOM, with the new changes.
+	4. getSnapshotBeforeUpdate(): In the getSnapshotBeforeUpdate() method you have access to the props and state before the update, meaning that even after the update, you can check what the values were before the update. If the getSnapshotBeforeUpdate() method is present, you should also include the componentDidUpdate() method, otherwise you will get an error.
+	5. componentDidUpdate(): The componentDidUpdate method is called after the component is updated in the DOM.
+
+3. Unmounting
+	The next phase in the lifecycle is when a component is removed from the DOM, or unmounting as React likes to call it.
+	React has only one built-in method that gets called when a component is unmounted:
+
+	1. componentWillUnmount(): The componentWillUnmount method is called when the component is about to be removed from the DOM.
+
+--------------------------------------------------------------
+
+1. Controlled Components:
+In controlled components, form data is controlled by React state. The value of the form elements (like input, textarea, select) is bound to the component state and updated through onChange handlers.
+Whenever the user interacts with the form element, the state is updated, and React re-renders the component with the updated value.
+Controlled components give you more control over form data, making it easier to manipulate or validate user input.
+
+
+import React, { useState } from 'react';
+
+function ControlledComponent() {
+  const [value, setValue] = useState('');
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
+
+  return (
+    <input
+      type="text"
+      value={value}
+      onChange={handleChange}
+    />
+  );
+}
+
+2. Uncontrolled Components:
+In uncontrolled components, the form data is handled by the DOM itself. You rely on refs to interact with form elements, and React doesn't manage their state.
+The data entered by the user is directly accessed from the DOM using refs when needed, rather than being maintained by React state.
+Uncontrolled components are useful for integrating React with non-React code, or when you want to manage form data directly without involving React state.
+
+import React, { useRef } from 'react';
+
+function UncontrolledComponent() {
+  const inputRef = useRef(null);
+
+  const handleClick = () => {
+    alert(`Input value: ${inputRef.current.value}`);
+  };
+
+  return (
+    <div>
+      <input type="text" ref={inputRef} />
+      <button onClick={handleClick}>Get Value</button>
+    </div>
+  );
+}
+
+
+----------------------------------------------------------------------------------
+In React, hooks are explicit. This means that you have to explicitly import them and use them within functional components.
+
+----------------------------------------------------------------------------------
+useEffect and useLayoutEffect are both hooks provided by React for managing side effects in functional components. While they are similar in some ways, they have differences in terms of when they are executed and whether they block rendering.
+ Here's a breakdown of their differences:
+
+Timing of Execution:
+    useEffect: Runs asynchronously after the component has been rendered to the screen. It doesn't block the browser from painting, layout, and paint phases.
+    useLayoutEffect: Runs synchronously after all DOM mutations. It runs before the browser has had a chance to paint, which means it can block visual updates.
+Scheduling:
+    useEffect: Scheduled to run after the browser has rendered any changes to the DOM, making it ideal for side effects that don't need to block the UI update.
+    useLayoutEffect: Scheduled to run before the browser paints the screen, making it suitable for operations that require synchronously measured layout or need to mutate the DOM immediately before painting.
+Usage:
+    useEffect: Used for side effects that don't need to be synchronously executed. It's often used for data fetching, subscriptions, or manually managing document titles.
+    useLayoutEffect: Used when a side effect is needed synchronously or when the side effect is likely to make changes to the DOM that affect layout.
+
+----------------------------------------------------------------------------------
+JSON to Object:
+	const jsonString = '{"name": "John", "age": 30}';
+	const jsonObject = JSON.parse(jsonString);
+	console.log(jsonObject); // { name: 'John', age: 30 }
+
+Object to JSON:
+	const obj = { name: 'John', age: 30 };
+	const jsonString = JSON.stringify(obj);
+	console.log(jsonString); // '{"name":"John","age":30}'
+
+
+
+
+
+--------------------------------------------------------
+Declarative and imperative programming are two different programming paradigms,
+Declarative Programming: {React}
+Definition: Declarative programming focuses on what needs to be accomplished rather than how to accomplish it.
+Imperative Programming: {JS, JQuery}
+Definition: Imperative programming focuses on detailing the steps required to solve a problem.
+
+
+-------------------------------------------------
+React elements are different from DOM elements as React elements are simple JavaScript objects and are efficient to create. React elements are the building blocks of any React app and should not be confused with React components which will be discussed in further articles.
+
+
+
+----------------------------------------
+Scope in js
+let scriptVar = 20; // scriptVar is in the script scope [only in this file]
+function myFunction() {
+    console.log(scriptVar); // Output: 20 (accessible from function)
+}
+console.log(scriptVar); // Output: 20 (accessible from outside function)
+
+
+function myFunction() {
+    let localVar = 10; // localVar is local to myFunction
+    console.log(localVar); // Output: 10
+}
+myFunction();
+console.log(localVar); // Error: localVar is not defined
+
+
+var globalVar = 30; // globalVar is in the global scope [we can access this variable in other js files as well]
+function myFunction() {
+    console.log(globalVar); // Output: 30 (accessible from function)
+}
+console.log(globalVar); // Output: 30 (accessible from outside function)
+
+
+
+-----------------------------------------------------------
+🔹 Server-Side Rendering (SSR):
+Rendering occurs on the server side.
+The server generates the HTML for a web page and sends it to the client's browser.
+The browser receives a fully rendered page, which is ready to be displayed to the user.
+SSR is advantageous for SEO (Search Engine Optimization) since search engine crawlers can easily index the content of the page.
+
+👍🏼 There are two types of server rendering, based on when it happens:
+1. Static Rendering (or Prerendering)/ Static Site Generation:
+ happens at build time or during revalidation and the result is cached. 
+ In nextJs we use generateStaticParams function
+2. Dynamic Rendering:
+ happens at request time in response to a client request.
+
+🔹 Client-Side Rendering (CSR):
+Rendering occurs on the client side (in the user's browser).
+The server sends minimal HTML, CSS, and JavaScript to the client.
+The browser then executes the JavaScript code to fetch data from an API and render the page dynamically.
+CSR provides a smoother user experience for web applications as only the necessary data is fetched and rendered, reducing initial load times and enabling more interactive user interfaces.
+
+🔹 Dynamic Route (/blog/[slug], /users/[id]): You must provide which params to pre-render at build time using generateStaticParams.
+🔹 Static Route (/about, /contact, /): In App Router, SSG happens automatically at build time (unless you opt out with no-store or similar).
+
+
+-------------------------------------------------------------
+how this will store in memory:
+
+const obj = {
+      firstName: 'anil',
+      address: {
+          a1: 'a1',
+          a2: 'a2',
+      }
+  }
+
+1. Memory Allocation: The engine allocates memory for the obj object.
+2. Primitive Values: Primitive values like strings ('anil', 'a1', and 'a2') are stored directly in memory.
+3. Object References: Objects (including nested objects) are stored by reference. This means that the memory for the address object is allocated separately, and the obj object contains a reference to the memory location of the address object.
+
+Memory
+--------------------------------------------------
+| Address | Value                                |
+--------------------------------------------------
+| 0x001   | obj -> { firstName: 0x100, address: 0x200 }
+| 0x100   | 'anil'                               |
+| 0x200   | address -> { a1: 0x300, a2: 0x400 }  |
+| 0x300   | 'a1'                                 |
+| 0x400   | 'a2'                                 |
+--------------------------------------------------
+
+
+------------------------------------------------------------
+
+1. How to update object values: Using spread operation
+
+const [s, sSet] = useState({
+  firstName: 'anil',
+  address: {
+      a1: 'a1',
+      a2: 'a2',
+  }
+});
+
+function ch(){
+    sSet((p) =>{
+        return {...p, address: {...p.address, a2: 'changes'}}
+    })
+}
+
+2. there are several other ways to update nested state in React.
+npm install immer
+
+import React, { useState } from 'react';
+import produce from 'immer';
+
+const [s, sSet] = useState({
+    firstName: 'anil',
+    address: {
+        a1: 'a1',
+        a2: 'a2',
+    }
+});
+
+function ch() {
+    sSet(produce(draft => {
+        draft.address.a2 = 'changes';
+    }));
+}
+
+------------------------------------------------------------
+
+In React, a Pure Component is a type of component that renders only when there are changes in state or props. This can lead to performance improvements by avoiding unnecessary re-renders. 
+import React from 'react';
+
+const MyFunctionalPureComponent = React.memo(({ text }) => {
+  console.log('MyFunctionalPureComponent rendered');
+  return (
+    <div>
+      {text}
+    </div>
+  );
+});
+
+export default MyFunctionalPureComponent;
+
+------------------------------------------------------------
+
+Component composition in React involves combining smaller, independent components to create complex UIs. Each sub-component can contain further components, enhancing code readability. This process breaks down the UI into manageable pieces, aiding traceability, scalability, and maintenance.
+
+------------------------------------------------------------
+
+React and Concurrency
+🏗 Traditional (Synchronous) Rendering
+Before React 16, rendering was synchronous:
+React would compute the entire virtual DOM update.
+Then it would update the real DOM in a single uninterrupted block.
+Problem ❌: If the update was large, it blocked the main thread → UI became janky, frozen, or unresponsive.
+
+⚡ Concurrent Rendering (React Fiber)
+React Fiber (the new reconciliation engine) enables interruptible rendering:
+Rendering is split into small units of work.
+React can pause rendering, abort it, or resume later.
+This lets React prioritize urgent tasks (like user typing) over less urgent tasks (like rendering a big list).
+
+🧠 How React Handles Concurrency
+React doesn’t run work in parallel (JS is still single-threaded).
+Instead, it uses the scheduler to break work into chunks and decide when to yield control back to the browser.
+Urgent updates (like text input, clicks) are handled immediately.
+Non-urgent updates (like animations, transitions, or data loading UI) are deferred.
+
+
+----------------------------------------
+How Memoization Works in React:
+React provides two key APIs for memoization:
+
+React.memo(): This is a higher-order component (HOC) used to prevent re-renders of functional components if their props have not changed. To create a pure component.
+useMemo(): A hook that memorizes the result of a computation and only recomputes it when its dependencies change.
+
+----------------------------------------
+REACT ARCHITECTURE:
+1. What triggers the process?
+The process starts whenever state or props change in a React component.
+👉 Example: setState(), useState(), or new props coming from parent.
+React then needs to update the UI to reflect the new data.
+
+2. Virtual DOM (VDOM)
+React doesn’t directly touch the browser’s real DOM (because it’s slow).
+Instead, it keeps a virtual representation (a tree of objects in memory).
+When state/props change, React creates a new Virtual DOM tree for the updated UI.
+👉 Think of it as React keeping a blueprint of the UI.
+
+3. Diffing Algorithm (Virtual DOM vs Previous Virtual DOM)
+React compares the new VDOM tree with the previous one (this is called diffing).
+Instead of checking everything, React uses heuristics:
+If the element type is the same → update only changed props.
+If different → destroy old and create new node.
+Result: A minimal set of changes (patch) that need to be applied to the actual DOM.
+👉 Example: If only one <button> text changes, React won’t re-render the entire page, just the button text.
+
+4. Reconciliation
+This is the process where React decides how to update the real DOM based on diffing.
+It calculates: What needs to change?
+Then applies only those minimal updates to the actual DOM in batches.
+👉 Reconciliation = finding the minimal update path.
+
+5. Fiber Architecture (React 16+)
+Before React 16, reconciliation was synchronous: if your UI tree was huge, React would block the main thread until updates finished (laggy).
+React introduced Fiber:
+A new internal data structure (a linked list tree) to represent components.
+React breaks work into small units of work (fibers) that can be paused, aborted, or resumed.
+This allows concurrent rendering: React can prepare updates in the background without blocking the UI.
+👉 Think of Fiber as: React’s scheduler for rendering work.
+
+6. Phases of Fiber
+React rendering has two phases:
+(a) Render (Reconciliation) Phase
+React builds the work-in-progress Fiber tree.
+It does diffing, calculates changes (effects).
+This phase can be paused/interrupted.
+(b) Commit Phase
+React applies the changes to the actual DOM.
+This phase is synchronous (cannot be interrupted).
+Runs lifecycle methods (componentDidMount, useEffect, etc.).
+
+7. Virtual DOM → Actual DOM
+After commit, the browser sees changes in the real DOM.
+Browser paints and updates the UI.

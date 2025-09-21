@@ -1,0 +1,11 @@
+.heading{
+    background-color: red;
+}
+
+
+.imgDiv{
+    border: 2px solid red;
+    border-radius: 20px;
+    display: inline-block;
+    padding: 20px;
+}

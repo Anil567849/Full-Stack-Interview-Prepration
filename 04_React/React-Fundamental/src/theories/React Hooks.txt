@@ -1,0 +1,22 @@
+Q. What are React Hooks, and how do they differ from class lifecycle methods?
+
+React Hooks are functions that let you to use the lifecycle features from functional components. They were introduced in React 16.8 as a way to add state and other React features to functional components, which previously could only be done in class components.
+
+
+Key Differences between React Hooks and Class Lifecycle Methods:
+1. Availability:
+Hooks are only available in functional components, while lifecycle methods are exclusive to class components.
+
+2. Purpose:
+Hooks provide a more concise and flexible way to manage state and side effects, while lifecycle methods are tied to specific stages of a component's life (mounting, updating, unmounting).
+
+3. Syntax:
+Hooks use a functional syntax, while lifecycle methods are methods within a class component.
+
+4. Commonly Used Hooks:
+useState: Adds state to a functional component.
+useEffect: Performs side effects (e.g., data fetching, subscriptions) in a functional component.
+useContext: Accesses the value of a React context from a functional component.
+useRef: Creates a mutable reference to a DOM element or a value.
+useMemo: Memoizes the result of a computation to optimize performance.
+useCallback: Memoizes a callback function to prevent unnecessary re-renders.

@@ -1,0 +1,60 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: teal;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+
+.main-div{
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.center-div{
+  border : 5px solid red;
+  border-radius: 20px;
+  min-height: 80vh;
+}
+.top-brand-name{
+  background-color: yellow;
+  border-radius: 10%;
+}
+.top-brand-name h1{
+  text-align: center;
+  padding: 20px;
+  color: blue;
+}
+.input-output-div .input-div input{
+  font-size: 20px;
+  padding: 20px;
+
+}
+.input-output-div .input-div button{
+  font-size: 20px;
+  padding: 20px;
+  background-color: green;
+  border-radius: 50%;
+  margin: 10px;
+}
+.input-output-div .output-div{
+  font-size: 20px;
+  margin: 10px;
+  overflow-y: auto;
+  max-height : 250px;
+}
+.input-output-div .output-div li{
+  font-size: 20px;
+  margin: 10px;
+}

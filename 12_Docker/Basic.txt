@@ -1,0 +1,14 @@
+Image:
+A Docker image is a lightweight, standalone, executable package that includes everything needed to run a piece of software, including the code, runtime, libraries, environment variables, and configuration files.
+Think of a Docker image as a blueprint for building something. It's a file that contains all the instructions needed to create a container, including the application code, libraries, and dependencies.
+
+Example: 
+ - nginx Image: An image that includes the Nginx web server, which you can use to serve web pages.
+ - python Image: An image that has Python installed, which you can use to run Python applications.
+ - mysql Image: An image that contains the MySQL database server, which you can use to manage databases.
+
+
+
+Container:
+A Docker container is a runtime instance of a Docker image. It is a lightweight, standalone, and executable software package that includes everything needed to run an application, isolated from the rest of the system.
+A Docker container is like a house built from the blueprint (image). It's a running instance of an image, where the application runs in an isolated environment.

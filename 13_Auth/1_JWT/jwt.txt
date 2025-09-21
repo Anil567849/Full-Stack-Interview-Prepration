@@ -1,0 +1,53 @@
+🔹 General Meaning of State 
+Stateful = The system remembers things about the client between requests (it stores “state” somewhere - in db, local-session-store, redis).
+Stateless = The system doesn’t remember anything between requests; each request must carry all the info it needs.
+
+🔹 Think of it like this:
+Stateful = A waiter remembers your order until food comes.
+Stateless = Every time you ask for food, you must tell the waiter exactly what you want, because they forget.
+
+*********
+🔹 JWT
+JWT (JSON Web Token) is a secure, compact token that proves your identity. When you log in, the server gives you a JWT, which you send with every request. The server can verify it without storing any session, so it knows it’s really you. It’s stateless, portable, and commonly used for authentication and authorization in web and mobile apps.
+
+🔹 JWT (JSON Web Token) is stateless by design.
+1. A JWT contains all the necessary information (claims) about the user inside the token itself (e.g., user id, roles, expiry).
+2. When a client makes a request, it just sends the JWT along with it (usually in the Authorization header).
+3. The server does not need to store the token in memory or a database — it just verifies the token’s signature using a secret/public key.
+4. Since no session storage is required on the server, it is stateless.
+
+Note: If you add token blacklisting (e.g., logging out, revoking tokens), you need a store (Redis, DB, etc.) to track invalid tokens. That makes it stateful.
+
+
+🔹 Structure of JWT
+A JWT is just a string with 3 parts separated by dots (.):
+
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.   <-- Header (metadata)
+eyJ1c2VySWQiOjEsInJvbGUiOiJhZG1pbiJ9.   <-- Payload (data/claims)
+abc123signaturexyz                      <-- Signature (verification)
+
+Header → metadata, e.g. { "alg": "HS256", "typ": "JWT" }
+Payload → data (claims) like user ID, email, roles, expiry time.
+Signature → ensures the token wasn’t tampered with (created using secret/public key).
+
+🔹 How JWT Works in Authentication
+Login: User enters email+password.
+Server validates credentials and generates a JWT containing user info.
+Client stores JWT (usually in localStorage, sessionStorage, or cookie).
+On every request, the client sends JWT in the Authorization header:
+Server verifies signature → if valid, trusts the data inside.
+
+Encryption in JWT:
+When a JWT is issued, the server signs it to make it secure:
+1. Secret Key (HMAC / symmetric signing)
+Same key is used to create and verify the token.
+Example: mySuperSecretKey123
+Only the server knows this key.
+If someone changes the token, the signature won’t match → server rejects it.
+
+2. Public/Private Key (RSA / asymmetric signing)
+Server signs the JWT with a private key.
+Anyone with the corresponding public key can verify it, but can’t create a valid token.
+Useful when multiple services need to verify tokens without sharing the private key.
+
+**********
